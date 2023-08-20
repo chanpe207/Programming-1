@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements Runnable{
     //Screen Settings
     final int originalTileSize = 16; //16 x 16 default tile size (players, mobs, etc)
     final int scale = 3; //rescales tiles so 16 x 16 appears 48 x 48
@@ -12,10 +12,23 @@ public class GamePanel extends JPanel {
     final int screenWidth = tileSize * maxScreenCol; // 864 wide
     final int screenHeight = tileSize * maxScreenRow; // 672 high
 
+    Thread gameThread; //allows game to run over time
+
     public GamePanel() {
 
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
+    }
+
+    public void startGameThread() {
+
+        gameThread = new Thread(this);
+        gameThread.start();
+    }
+
+    @Override
+    public void run() {
+
     }
 }
