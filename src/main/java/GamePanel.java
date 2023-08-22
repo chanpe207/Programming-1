@@ -29,6 +29,33 @@ public class GamePanel extends JPanel implements Runnable{
 
     @Override
     public void run() {
+        // GAME LOOP
+        while(gameThread != null) {
+
+            // UPDATE: updates information such as character positions
+            update();
+
+            // DRAW: draw the screen with the updated information
+            repaint();
+        }
+
+    }
+
+    public void update() {
+
+    }
+
+    public void paintComponent(Graphics g) {
+        // this is a feature of superclass JPanel to draw graphics
+        super.paintComponent(g);
+
+        Graphics2D g2 = (Graphics2D)g; //converts graphics to graphics2D
+
+        g2.setColor(Color.white);
+
+        g2.fillRect(100, 100, tileSize, tileSize);
+
+        g2.dispose(); //disposes of graphics context and releases system resources to save memory
 
     }
 }
