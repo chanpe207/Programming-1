@@ -17,6 +17,7 @@ public class GamePanel extends JPanel implements Runnable{
 
     KeyHandler keyH = new KeyHandler(); //instantiates keyHandler class
     Thread gameThread; //allows game to run over time
+    Player player = new Player(this,keyH);
 
     //Set player's default position
     int playerX = 200;
