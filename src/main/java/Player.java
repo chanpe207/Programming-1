@@ -25,6 +25,7 @@ public class Player extends Entity{
         y = 100;
         speed = 4;
         direction = "down";
+        spriteWalking = false;
     }
 
     public void getPlayerImage() {
@@ -65,30 +66,41 @@ public class Player extends Entity{
         //Key presses
         if(keyH.upPressed == true) {
             direction = "up";
+            spriteWalking = true;
             y -= speed;
         }
         else if(keyH.downPressed == true) {
             direction = "down";
+            spriteWalking = true;
             y += speed;
         }
         else if(keyH.rightPressed == true) {
             direction = "right";
+            spriteWalking = true;
             x += speed;
         }
         else if(keyH.leftPressed == true) {
             direction = "left";
+            spriteWalking = true;
             x -= speed;
         }
+        else {
+            spriteWalking = false;
+        }
 
-        spriteCounter++;
-        if(spriteCounter > spriteNext) {
-            if(spriteNum < 4) {
-                spriteNum++;
+        if(spriteWalking == true) {
+            spriteCounter++;
+            if (spriteCounter > spriteNext) {
+                if (spriteNum < 4) {
+                    spriteNum++;
+                } else {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
             }
-            else {
-                spriteNum = 1;
-            }
-            spriteCounter = 0;
+        }
+        else {
+            spriteNum = 5;
         }
     }
 
@@ -113,6 +125,9 @@ public class Player extends Entity{
                 if(spriteNum == 4) {
                     image = backward4;
                 }
+                if(spriteNum == 5) {
+                    image = standingBackward;
+                }
                 break;
             case "down":
                 if(spriteNum == 1) {
@@ -126,6 +141,9 @@ public class Player extends Entity{
                 }
                 if(spriteNum == 4) {
                     image = forward4;
+                }
+                if(spriteNum == 5) {
+                    image = standingForward;
                 }
                 break;
             case "right":
@@ -141,6 +159,9 @@ public class Player extends Entity{
                 if(spriteNum == 4) {
                     image = right4;
                 }
+                if(spriteNum == 5) {
+                    image = standingRight;
+                }
                 break;
             case "left":
                 if(spriteNum == 1) {
@@ -154,6 +175,9 @@ public class Player extends Entity{
                 }
                 if(spriteNum == 4) {
                     image = left4;
+                }
+                if(spriteNum == 5) {
+                    image = standingLeft;
                 }
                 break;
         }
