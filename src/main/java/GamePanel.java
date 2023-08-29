@@ -6,7 +6,7 @@ public class GamePanel extends JPanel implements Runnable{
     final int originalTileSize = 16; //16 x 16 default tile size (players, mobs, etc)
     final int scale = 3; //rescales tiles so 16 x 16 appears 48 x 48
 
-    final int tileSize = originalTileSize * scale;
+    public final int tileSize = originalTileSize * scale;
     final int maxScreenCol = 18;
     final int maxScreenRow = 14;
     final int screenWidth = tileSize * maxScreenCol; // 864 wide
@@ -81,20 +81,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public void update() {
-
-        //Key presses
-        if(keyH.upPressed == true) {
-            playerY -= playerSpeed;
-        }
-        else if(keyH.downPressed == true) {
-            playerY += playerSpeed;
-        }
-        else if(keyH.rightPressed == true) {
-            playerX += playerSpeed;
-        }
-        else if(keyH.leftPressed == true) {
-            playerX -= playerSpeed;
-        }
+        player.update();
 
     }
 
@@ -104,9 +91,7 @@ public class GamePanel extends JPanel implements Runnable{
 
         Graphics2D g2 = (Graphics2D)g; //converts graphics to graphics2D
 
-        g2.setColor(Color.white);
-
-        g2.fillRect(playerX, playerY, tileSize, tileSize);
+        player.draw(g2);
 
         g2.dispose(); //disposes of graphics context and releases system resources to save memory
 
