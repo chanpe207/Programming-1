@@ -9,4 +9,9 @@ public class Entity {
 
     public BufferedImage standingBackward, standingForward, standingLeft, standingRight, backward1, backward2, backward3, backward4, forward1, forward2, forward3, forward4, left1, left2, left3, left4, right1, right2, right3, right4;
     public String direction;
+
+    public int spriteCounter = 0;
+    public int spriteNum = 1;
+    public int spriteFPS = 5; // FPS of character animation
+    public int spriteNext = 60/spriteFPS; // number of updates before sprite changes
 }

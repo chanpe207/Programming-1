@@ -79,6 +79,17 @@ public class Player extends Entity{
             direction = "left";
             x -= speed;
         }
+
+        spriteCounter++;
+        if(spriteCounter > spriteNext) {
+            if(spriteNum < 4) {
+                spriteNum++;
+            }
+            else {
+                spriteNum = 1;
+            }
+            spriteCounter = 0;
+        }
     }
 
     public void draw(Graphics2D g2) {
@@ -90,16 +101,60 @@ public class Player extends Entity{
 
         switch(direction) {
             case "up":
-                image = backward1;
+                if(spriteNum == 1) {
+                    image = backward1;
+                }
+                if(spriteNum == 2) {
+                    image = backward2;
+                }
+                if(spriteNum == 3) {
+                    image = backward3;
+                }
+                if(spriteNum == 4) {
+                    image = backward4;
+                }
                 break;
             case "down":
-                image = forward1;
+                if(spriteNum == 1) {
+                    image = forward1;
+                }
+                if(spriteNum == 2) {
+                    image = forward2;
+                }
+                if(spriteNum == 3) {
+                    image = forward3;
+                }
+                if(spriteNum == 4) {
+                    image = forward4;
+                }
                 break;
             case "right":
-                image = right1;
+                if(spriteNum == 1) {
+                    image = right1;
+                }
+                if(spriteNum == 2) {
+                    image = right2;
+                }
+                if(spriteNum == 3) {
+                    image = right3;
+                }
+                if(spriteNum == 4) {
+                    image = right4;
+                }
                 break;
             case "left":
-                image = left1;
+                if(spriteNum == 1) {
+                    image = left1;
+                }
+                if(spriteNum == 2) {
+                    image = left2;
+                }
+                if(spriteNum == 3) {
+                    image = left3;
+                }
+                if(spriteNum == 4) {
+                    image = left4;
+                }
                 break;
         }
 
