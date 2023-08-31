@@ -13,6 +13,6 @@ public class Entity {
 
     public int spriteCounter = 0;
     public int spriteNum = 1;
-    public int spriteFPS = 5; // FPS of character animation
+    public int spriteFPS = 8; // FPS of character animation
     public int spriteNext = 60/spriteFPS; // number of updates before sprite changes
 }
