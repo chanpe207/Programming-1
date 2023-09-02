@@ -1,7 +1,3 @@
-//package entity;
-
-//import java.GamePanel;
-
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -11,9 +7,15 @@ public class Player extends Entity{
     GamePanel gp;
     KeyHandler keyH;
 
+    public final int screenX;
+    public final int screenY;
+
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
+
+        screenX = gp.screenWidth/2 - (gp.tileSize/2);
+        screenY = gp.screenHeight/2 - (gp.tileSize/2);
 
         setDefaultValues();
         getPlayerImage();
@@ -21,8 +23,8 @@ public class Player extends Entity{
     }
 
     public void setDefaultValues () {
-        x = 100;
-        y = 100;
+        worldX = gp.tileSize * 27 - (gp.tileSize/2);
+        worldY = gp.tileSize * 21 - (gp.tileSize/2);
         speed = 4;
         direction = "down";
         spriteWalking = false;
@@ -67,22 +69,22 @@ public class Player extends Entity{
         if(keyH.upPressed == true) {
             direction = "up";
             spriteWalking = true;
-            y -= speed;
+            worldY -= speed;
         }
         else if(keyH.downPressed == true) {
             direction = "down";
             spriteWalking = true;
-            y += speed;
+            worldY += speed;
         }
         else if(keyH.rightPressed == true) {
             direction = "right";
             spriteWalking = true;
-            x += speed;
+            worldX += speed;
         }
         else if(keyH.leftPressed == true) {
             direction = "left";
             spriteWalking = true;
-            x -= speed;
+            worldX -= speed;
         }
         else {
             spriteWalking = false;
@@ -105,9 +107,6 @@ public class Player extends Entity{
     }
 
     public void draw(Graphics2D g2) {
-
-//        g2.setColor(Color.white);
-//        g2.fillRect(x, y, gp.tileSize, gp.tileSize);
 
         BufferedImage image = null;
 
@@ -182,7 +181,7 @@ public class Player extends Entity{
                 break;
         }
 
-        g2.drawImage(image, x, y, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
     }
 
 }
