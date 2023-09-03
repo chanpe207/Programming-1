@@ -4,7 +4,7 @@ import java.awt.*;
 public class GamePanel extends JPanel implements Runnable{
     //Screen Settings
     final int originalTileSize = 16; //16 x 16 default tile size (players, mobs, etc)
-    final int scale = 3; //rescales tiles so 16 x 16 appears 48 x 48
+    public final int scale = 3; //rescales tiles so 16 x 16 appears 48 x 48
 
     public final int tileSize = originalTileSize * scale;
     public final int maxScreenCol = 18;
@@ -24,6 +24,7 @@ public class GamePanel extends JPanel implements Runnable{
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler(); //instantiates keyHandler class
     Thread gameThread; //allows game to run over time
+    CollisionChecker cChecker = new CollisionChecker(this);
     public Player player = new Player(this,keyH);
 
     public GamePanel() {
