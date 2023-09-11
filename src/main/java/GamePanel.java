@@ -25,7 +25,9 @@ public class GamePanel extends JPanel implements Runnable{
     KeyHandler keyH = new KeyHandler(); //instantiates keyHandler class
     Thread gameThread; //allows game to run over time
     CollisionChecker cChecker = new CollisionChecker(this);
+    public AssetSetter aSetter = new AssetSetter(this);
     public Player player = new Player(this,keyH);
+    public SuperObject obj[] = new SuperObject[10];
 
     public GamePanel() {
 
@@ -34,6 +36,11 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true);
         this.addKeyListener(keyH);
         this.setFocusable(true);
+    }
+
+    public void setupGame() {
+
+        aSetter.setObject();
     }
 
     public void startGameThread() {
@@ -95,6 +102,13 @@ public class GamePanel extends JPanel implements Runnable{
         Graphics2D g2 = (Graphics2D)g; //converts graphics to graphics2D
         // draw tiles first
         tileM.draw(g2);
+
+        // draw objects next
+        for(int i = 0; i < obj.length; i++) {
+            if(obj[i] != null) {
+                obj[i].draw(g2, this);
+            }
+        }
 
         //draw player next
         player.draw(g2);
