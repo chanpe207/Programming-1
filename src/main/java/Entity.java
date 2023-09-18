@@ -15,5 +15,6 @@ public class Entity {
     public int spriteFPS = 8; // FPS of character animation
     public int spriteNext = 60/spriteFPS; // number of updates before sprite changes
     public Rectangle solidArea;
+    public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
 }
