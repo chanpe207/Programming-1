@@ -10,6 +10,7 @@ public class Player extends Entity{
     public final int screenX;
     public final int screenY;
     int hasKey = 0;
+    int hasCookie = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -166,6 +167,19 @@ public class Player extends Entity{
                         gp.obj[i] = null;
                         hasKey--;
                         System.out.println("Key: " +hasKey);
+                    }
+                    break;
+                case "Potion":
+                    speed += 3;
+                    gp.obj[i] = null;
+                    break;
+                case "Cookie":
+                    hasCookie++;
+                    gp.obj[i] = null;
+                    System.out.println("Cookie: " +hasCookie);
+                    if (hasCookie > 2) {
+                        speed -= 3;
+                        hasCookie = 0;
                     }
                     break;
 

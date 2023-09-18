@@ -28,5 +28,21 @@ public class AssetSetter {
         gp.obj[4].worldX = 37 * gp.tileSize;
         gp.obj[4].worldY = 30 * gp.tileSize;
 
+        gp.obj[5] = new OBJ_Potion();
+        gp.obj[5].worldX = 47 * gp.tileSize;
+        gp.obj[5].worldY = 37 * gp.tileSize;
+
+        gp.obj[6] = new OBJ_Cookie();
+        gp.obj[6].worldX = 45 * gp.tileSize;
+        gp.obj[6].worldY = 26 * gp.tileSize;
+
+        gp.obj[7] = new OBJ_Cookie();
+        gp.obj[7].worldX = 33 * gp.tileSize;
+        gp.obj[7].worldY = 33 * gp.tileSize;
+
+        gp.obj[8] = new OBJ_Cookie();
+        gp.obj[8].worldX = 40 * gp.tileSize;
+        gp.obj[8].worldY = 40 * gp.tileSize;
+
     }
 }
