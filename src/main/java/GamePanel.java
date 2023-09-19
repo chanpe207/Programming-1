@@ -22,9 +22,11 @@ public class GamePanel extends JPanel implements Runnable{
     // System
     TileManager tileM = new TileManager(this);
     KeyHandler keyH = new KeyHandler(); //instantiates keyHandler class
-    Sound sound = new Sound();
+    Sound music = new Sound();
+    Sound se = new Sound();
     CollisionChecker cChecker = new CollisionChecker(this);
     public AssetSetter aSetter = new AssetSetter(this);
+    public UI ui = new UI(this);
     Thread gameThread; //allows game to run over time
 
     // Entities and Objects
@@ -114,8 +116,11 @@ public class GamePanel extends JPanel implements Runnable{
             }
         }
 
-        //draw player next
+        // draw player next
         player.draw(g2);
+
+        // draw UI last
+        ui.draw(g2);
 
         g2.dispose(); //disposes of graphics context and releases system resources to save memory
 
@@ -123,18 +128,18 @@ public class GamePanel extends JPanel implements Runnable{
 
     //Music
     public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
 
     public void stopMusic() {
-        sound.stop();
+        music.stop();
     }
 
     //Sound Effects
     public void playSE(int i) {
-        sound.setFile(i);
-        sound.play();
+        se.setFile(i);
+        se.play();
     }
 }
