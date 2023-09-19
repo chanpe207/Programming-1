@@ -153,12 +153,14 @@ public class Player extends Entity{
                 case "Key":
                     hasKey++;
                     gp.obj[i] = null;
+                    gp.playSE(9);
                     System.out.println("Key: " +hasKey);
                     break;
                 case "Door":
                     if(hasKey > 0) {
                         gp.obj[i] = null;
                         hasKey--;
+                        gp.playSE(10);
                         System.out.println("Key: " +hasKey);
                     }
                     break;
@@ -166,6 +168,7 @@ public class Player extends Entity{
                     if(hasKey > 0) {
                         gp.obj[i] = null;
                         hasKey--;
+                        gp.playSE(5);
                         System.out.println("Key: " +hasKey);
                     }
                     break;
@@ -173,10 +176,12 @@ public class Player extends Entity{
                     hasPotion++;
                     speed += 3;
                     gp.obj[i] = null;
+                    gp.playSE(2);
                     System.out.println("Cookie: " +hasPotion);
                     break;
                 case "Cookie":
                     gp.obj[i] = null;
+                    gp.playSE(2);
                     if (hasPotion > 0) {
                         speed -= 3;
                         hasPotion--;

@@ -7,3 +7,9 @@ Assignment Objectives:
 - Includes original graphics
 - Includes a boss that can be fought by player
 - Game demonstrates the basics of programming language and further independent research
+
+Game sounds by:
+
+- <a href="https://pixabay.com/users/floraphonic-38928062/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=166694">floraphonic</a> from <a href="https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=166694">Pixabay</a>
+
+- <a href="https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=music&utm_content=43894">Pixabay</a>
