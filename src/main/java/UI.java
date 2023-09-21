@@ -27,13 +27,13 @@ public class UI {
 
         courier_30 = new Font("Courier", Font.BOLD, 20);
 
-        OBJ_Key key = new OBJ_Key();
+        OBJ_Key key = new OBJ_Key(gp);
         keyImage = key.image;
 
-        OBJ_Chest treasure = new OBJ_Chest();
+        OBJ_Chest treasure = new OBJ_Chest(gp);
         treasureImage = treasure.image;
 
-        OBJ_Potion potion = new OBJ_Potion();
+        OBJ_Potion potion = new OBJ_Potion(gp);
         potionImage = potion.image;
 
         try{

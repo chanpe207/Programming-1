@@ -45,35 +45,45 @@ public class Player extends Entity{
 
     public void getPlayerImage() {
 
+        standingBackward = setup("Player_Standing_Backward");
+        standingForward = setup("Player_Standing_Forward");
+        standingLeft = setup("Player_Standing_Left");
+        standingRight = setup("Player_Standing_Right");
+        forward1 = setup("Player_Walking_Forward_1");
+        forward2 = setup("Player_Walking_Forward_2");
+        forward3 = setup("Player_Walking_Forward_3");
+        forward4 = setup("Player_Walking_Forward_4");
+        backward1 = setup("Player_Walking_Backward_1");
+        backward2 = setup("Player_Walking_Backward_2");
+        backward3 = setup("Player_Walking_Backward_3");
+        backward4 = setup("Player_Walking_Backward_4");
+        left1 = setup("Player_Walking_Left_1");
+        left2 = setup("Player_Walking_Left_2");
+        left3 = setup("Player_Walking_Left_3");
+        left4 = setup("Player_Walking_Left_4");
+        right1 = setup("Player_Walking_Right_1");
+        right2 = setup("Player_Walking_Right_2");
+        right3 = setup("Player_Walking_Right_3");
+        right4 = setup("Player_Walking_Right_4");
+
+    }
+
+    public BufferedImage setup(String imageName) {
+
+        UtilityTool uTool = new UtilityTool();
+        BufferedImage image = null;
+
         try {
-//            System.out.println("Image loading started");
 
-            standingBackward = ImageIO.read(getClass().getResourceAsStream("/player/Player_Standing_Backward.png"));
-            standingForward = ImageIO.read(getClass().getResourceAsStream("/player/Player_Standing_Forward.png"));
-            standingLeft = ImageIO.read(getClass().getResourceAsStream("/player/Player_Standing_Left.png"));
-            standingRight = ImageIO.read(getClass().getResourceAsStream("/player/Player_Standing_Right.png"));
-            forward1 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Forward_1.png"));
-            forward2 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Forward_2.png"));
-            forward3 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Forward_3.png"));
-            forward4 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Forward_4.png"));
-            backward1 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Backward_1.png"));
-            backward2 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Backward_2.png"));
-            backward3 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Backward_3.png"));
-            backward4 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Backward_4.png"));
-            left1 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Left_1.png"));
-            left2 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Left_2.png"));
-            left3 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Left_3.png"));
-            left4 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Left_4.png"));
-            right1 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Right_1.png"));
-            right2 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Right_2.png"));
-            right3 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Right_3.png"));
-            right4 = ImageIO.read(getClass().getResourceAsStream("/player/Player_Walking_Right_4.png"));
+            image = ImageIO.read(getClass().getResourceAsStream("/player/"+ imageName +".png"));
+            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
 
-//            System.out.println("Image loading ended");
-
-        }catch(IOException e) {
+        }catch(IOException e)   {
             e.printStackTrace();
         }
+
+        return image;
+
     }
 
     public void update() {
@@ -276,7 +286,7 @@ public class Player extends Entity{
                 break;
         }
 
-        g2.drawImage(image, screenX, screenY, gp.tileSize, gp.tileSize, null);
+        g2.drawImage(image, screenX, screenY, null);
     }
 
 }
