@@ -11,6 +11,7 @@ public class Player extends Entity{
     public final int screenY;
     int hasKey = 0;
     int hasPotion = 0;
+    int hasTreasure = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -154,22 +155,29 @@ public class Player extends Entity{
                     hasKey++;
                     gp.obj[i] = null;
                     gp.playSE(9);
-                    System.out.println("Key: " +hasKey);
+                    gp.ui.showMessage("You found a Key!");
                     break;
                 case "Door":
                     if(hasKey > 0) {
                         gp.obj[i] = null;
                         hasKey--;
                         gp.playSE(10);
-                        System.out.println("Key: " +hasKey);
+                        gp.ui.showMessage("You opened the Door!");
+                    }
+                    else {
+                        gp.ui.showMessage("You need a Key!");
                     }
                     break;
                 case "Chest":
                     if(hasKey > 0) {
                         gp.obj[i] = null;
                         hasKey--;
+                        hasTreasure++;
                         gp.playSE(5);
-                        System.out.println("Key: " +hasKey);
+                        gp.ui.showMessage("You found treasure!");
+                    }
+                    else {
+                        gp.ui.showMessage("You need a Key!");
                     }
                     break;
                 case "Potion":
@@ -177,7 +185,6 @@ public class Player extends Entity{
                     speed += 3;
                     gp.obj[i] = null;
                     gp.playSE(2);
-                    System.out.println("Cookie: " +hasPotion);
                     break;
                 case "Cookie":
                     gp.obj[i] = null;
