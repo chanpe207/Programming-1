@@ -9,9 +9,6 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
-    int hasKey = 0;
-    int hasPotion = 0;
-    int hasTreasure = 0;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -157,55 +154,6 @@ public class Player extends Entity{
 
         //check if an object was touched
         if(i != 999) {
-
-            String objectName = gp.obj[i].name;
-
-            switch(objectName) {
-                case "Key":
-                    hasKey++;
-                    gp.obj[i] = null;
-                    gp.playSE(9);
-                    gp.ui.showMessage("You found a Key!");
-                    break;
-                case "Door":
-                    if(hasKey > 0) {
-                        gp.obj[i] = null;
-                        hasKey--;
-                        gp.playSE(10);
-                        gp.ui.showMessage("You opened the Door!");
-                    }
-                    else {
-                        gp.ui.showMessage("You need a Key!");
-                    }
-                    break;
-                case "Chest":
-                    if(hasKey > 0) {
-                        gp.obj[i] = null;
-                        hasKey--;
-                        hasTreasure++;
-                        gp.playSE(5);
-                        gp.ui.showMessage("You found treasure!");
-                    }
-                    else {
-                        gp.ui.showMessage("You need a Key!");
-                    }
-                    break;
-                case "Potion":
-                    hasPotion++;
-                    speed += 3;
-                    gp.obj[i] = null;
-                    gp.playSE(2);
-                    break;
-                case "Cookie":
-                    gp.obj[i] = null;
-                    gp.playSE(2);
-                    if (hasPotion > 0) {
-                        speed -= 3;
-                        hasPotion--;
-                    }
-                    break;
-
-            }
 
         }
 
