@@ -8,6 +8,7 @@ public class UI {
     GamePanel gp;
     Graphics2D g2;
     Font courier_20;
+    BufferedImage full_heart, half_heart, no_heart;
     public boolean messageOn = false;
     public String message = "";
     public int commandNum = 0;
@@ -16,6 +17,12 @@ public class UI {
         this.gp = gp;
 
         courier_20 = new Font("Courier", Font.BOLD, 20);
+
+        // Create HUD Object
+        SuperObject heart = new OBJ_Heart(gp);
+        full_heart = heart.image;
+        half_heart = heart.image2;
+        no_heart = heart.image3;
     }
 
     public void showMessage(String text) {
@@ -40,10 +47,42 @@ public class UI {
         //Play State
         if(gp.gameState == gp.playState) {
             // Do play state
+            drawPlayerLife();
         }
         if(gp.gameState == gp.pauseState) {
             // Pause screen
             drawPauseScreen();
+        }
+    }
+
+    public void drawPlayerLife() {
+
+        // display on top left
+        int x = gp.screenWidth - (gp.tileSize+5)*4;
+        int y = gp.tileSize/2;
+        int i = 0;
+
+        // Draw blank hearts
+        while(i < gp.player.maxLife/2) {
+            g2.drawImage(no_heart, x, y, null);
+            i++;
+            x += gp.tileSize+5;
+        }
+
+        // Reset
+        x = gp.screenWidth - (gp.tileSize+5)*4;
+        y = gp.tileSize/2;
+        i = 0;
+
+        // Draw Current life
+        while(i < gp.player.life) {
+            g2.drawImage(half_heart, x, y, null);
+            i++;
+            if(i < gp.player.life) {
+                g2.drawImage(full_heart, x, y, null);
+            }
+            i++;
+            x += gp.tileSize+5;
         }
     }
 
