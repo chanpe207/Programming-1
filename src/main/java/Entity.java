@@ -20,7 +20,7 @@ public class Entity {
     public int spriteNext = 60/spriteFPS; // number of updates before sprite changes
 
     // Collision area
-    public Rectangle solidArea;
+    public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
     public int solidAreaDefaultX, solidAreaDefaultY;
     public boolean collisionOn = false;
 

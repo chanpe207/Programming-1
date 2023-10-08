@@ -7,6 +7,6 @@ public class OBJ_Potion extends Entity{
         super(gp);
 
         name = "Potion";
-        image = setup("/objects/potion");
+        forward1 = setup("/objects/potion");
     }
 }

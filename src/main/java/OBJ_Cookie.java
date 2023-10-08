@@ -7,6 +7,6 @@ public class OBJ_Cookie extends Entity{
         super(gp);
 
         name = "Cookie";
-        image = setup("/objects/cookie");
+        forward1 = setup("/objects/cookie");
     }
 }

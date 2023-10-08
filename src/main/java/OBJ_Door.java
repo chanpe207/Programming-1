@@ -8,7 +8,7 @@ public class OBJ_Door extends Entity{
         super(gp);
 
         name = "Door";
-        image = setup("/objects/door");
+        forward1 = setup("/objects/door");
         collision = true;
 
         // Collision area of door
