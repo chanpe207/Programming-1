@@ -11,7 +11,7 @@ public class Player extends Entity{
     public final int screenY;
 
     public Player(GamePanel gp, KeyHandler keyH) {
-        this.gp = gp;
+        super(gp);
         this.keyH = keyH;
 
         screenX = gp.screenWidth/2 - (gp.tileSize/2);
@@ -40,50 +40,32 @@ public class Player extends Entity{
         spriteWalking = false;
 
         // Player status
-        maxLife = 6; // 2 lifes = 1 heart
+        maxLife = 6; // 2 lives = 1 heart
         life = maxLife;
     }
 
     public void getPlayerImage() {
 
-        standingBackward = setup("Player_Standing_Backward");
-        standingForward = setup("Player_Standing_Forward");
-        standingLeft = setup("Player_Standing_Left");
-        standingRight = setup("Player_Standing_Right");
-        forward1 = setup("Player_Walking_Forward_1");
-        forward2 = setup("Player_Walking_Forward_2");
-        forward3 = setup("Player_Walking_Forward_3");
-        forward4 = setup("Player_Walking_Forward_4");
-        backward1 = setup("Player_Walking_Backward_1");
-        backward2 = setup("Player_Walking_Backward_2");
-        backward3 = setup("Player_Walking_Backward_3");
-        backward4 = setup("Player_Walking_Backward_4");
-        left1 = setup("Player_Walking_Left_1");
-        left2 = setup("Player_Walking_Left_2");
-        left3 = setup("Player_Walking_Left_3");
-        left4 = setup("Player_Walking_Left_4");
-        right1 = setup("Player_Walking_Right_1");
-        right2 = setup("Player_Walking_Right_2");
-        right3 = setup("Player_Walking_Right_3");
-        right4 = setup("Player_Walking_Right_4");
-
-    }
-
-    public BufferedImage setup(String imageName) {
-
-        UtilityTool uTool = new UtilityTool();
-        BufferedImage image = null;
-
-        try {
-
-            image = ImageIO.read(getClass().getResourceAsStream("/player/"+ imageName +".png"));
-            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
-
-        }catch(IOException e)   {
-            e.printStackTrace();
-        }
-
-        return image;
+        standingBackward = setup("/player/Player_Standing_Backward");
+        standingForward = setup("/player/Player_Standing_Forward");
+        standingLeft = setup("/player/Player_Standing_Left");
+        standingRight = setup("/player/Player_Standing_Right");
+        forward1 = setup("/player/Player_Walking_Forward_1");
+        forward2 = setup("/player/Player_Walking_Forward_2");
+        forward3 = setup("/player/Player_Walking_Forward_3");
+        forward4 = setup("/player/Player_Walking_Forward_4");
+        backward1 = setup("/player/Player_Walking_Backward_1");
+        backward2 = setup("/player/Player_Walking_Backward_2");
+        backward3 = setup("/player/Player_Walking_Backward_3");
+        backward4 = setup("/player/Player_Walking_Backward_4");
+        left1 = setup("/player/Player_Walking_Left_1");
+        left2 = setup("/player/Player_Walking_Left_2");
+        left3 = setup("/player/Player_Walking_Left_3");
+        left4 = setup("/player/Player_Walking_Left_4");
+        right1 = setup("/player/Player_Walking_Right_1");
+        right2 = setup("/player/Player_Walking_Right_2");
+        right3 = setup("/player/Player_Walking_Right_3");
+        right4 = setup("/player/Player_Walking_Right_4");
 
     }
 
@@ -163,82 +145,6 @@ public class Player extends Entity{
 
     }
 
-    public void draw(Graphics2D g2) {
 
-        BufferedImage image = null;
-
-        switch(direction) {
-            case "up":
-                if(spriteNum == 1) {
-                    image = backward1;
-                }
-                if(spriteNum == 2) {
-                    image = backward2;
-                }
-                if(spriteNum == 3) {
-                    image = backward3;
-                }
-                if(spriteNum == 4) {
-                    image = backward4;
-                }
-                if(spriteNum == 5) {
-                    image = standingBackward;
-                }
-                break;
-            case "down":
-                if(spriteNum == 1) {
-                    image = forward1;
-                }
-                if(spriteNum == 2) {
-                    image = forward2;
-                }
-                if(spriteNum == 3) {
-                    image = forward3;
-                }
-                if(spriteNum == 4) {
-                    image = forward4;
-                }
-                if(spriteNum == 5) {
-                    image = standingForward;
-                }
-                break;
-            case "right":
-                if(spriteNum == 1) {
-                    image = right1;
-                }
-                if(spriteNum == 2) {
-                    image = right2;
-                }
-                if(spriteNum == 3) {
-                    image = right3;
-                }
-                if(spriteNum == 4) {
-                    image = right4;
-                }
-                if(spriteNum == 5) {
-                    image = standingRight;
-                }
-                break;
-            case "left":
-                if(spriteNum == 1) {
-                    image = left1;
-                }
-                if(spriteNum == 2) {
-                    image = left2;
-                }
-                if(spriteNum == 3) {
-                    image = left3;
-                }
-                if(spriteNum == 4) {
-                    image = left4;
-                }
-                if(spriteNum == 5) {
-                    image = standingLeft;
-                }
-                break;
-        }
-
-        g2.drawImage(image, screenX, screenY, null);
-    }
 
 }

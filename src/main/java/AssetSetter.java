@@ -7,7 +7,13 @@ public class AssetSetter {
     }
 
     public void setObject() {
+        gp.obj[0] = new OBJ_Door(gp);
+        gp.obj[0].worldX = gp.tileSize*21;
+        gp.obj[0].worldY = gp.tileSize*22;
 
+        gp.obj[1] = new OBJ_Door(gp);
+        gp.obj[1].worldX = gp.tileSize*13;
+        gp.obj[1].worldY = gp.tileSize*14;
 
     }
 }

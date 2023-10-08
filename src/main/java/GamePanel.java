@@ -1,5 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class GamePanel extends JPanel implements Runnable{
     //Screen Settings
@@ -31,7 +34,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     // Entities and Objects
     public Player player = new Player(this,keyH);
-    public SuperObject obj[] = new SuperObject[10];
+    public Entity obj[] = new Entity[10];
+    ArrayList<Entity> entityList = new ArrayList<>();
 
     // Game State
     public int gameState;
@@ -126,15 +130,32 @@ public class GamePanel extends JPanel implements Runnable{
             // draw tiles first
             tileM.draw(g2);
 
-            // draw objects next
+            // Create entities list
+            entityList.add(player);
+
             for(int i = 0; i < obj.length; i++) {
                 if(obj[i] != null) {
-                    obj[i].draw(g2, this);
+                    entityList.add(obj[i]);
                 }
             }
 
-            // draw player next
-            player.draw(g2);
+            // Sort entities by worldY
+            Collections.sort(entityList, new Comparator<Entity>() {
+                @Override
+                public int compare(Entity e1, Entity e2) {
+                    int result = Integer.compare(e1.worldY, e2.worldY);
+                    return result;
+                }
+            });
+
+            // Draw entities
+            for(int i = 0; i < entityList.size(); i++) {
+                entityList.get(i).draw(g2);
+            }
+            // Empty entity list
+            for(int i = 0; i < entityList.size(); i++) {
+                entityList.remove(i);
+            }
 
             // draw UI last
             ui.draw(g2);

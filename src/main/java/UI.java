@@ -19,7 +19,7 @@ public class UI {
         courier_20 = new Font("Courier", Font.BOLD, 20);
 
         // Create HUD Object
-        SuperObject heart = new OBJ_Heart(gp);
+        Entity heart = new OBJ_Heart(gp);
         full_heart = heart.image;
         half_heart = heart.image2;
         no_heart = heart.image3;
