@@ -99,6 +99,10 @@ public class Player extends Entity{
         int objIndex = gp.cChecker.checkObject(this, true);
         pickUpObject(objIndex);
 
+        // Check monster collision
+        int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+        interactMonster(monsterIndex);
+
         // If collision is false, and arrow key is pressed, player can move
         if(collisionOn == false && spriteWalking == true) {
 
@@ -142,6 +146,14 @@ public class Player extends Entity{
 
         }
 
+    }
+
+    public void interactMonster(int i) {
+
+        //check if an object was touched
+        if(i != 999) {
+            System.out.println("You touched a monster!");
+        }
     }
 
 

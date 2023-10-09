@@ -66,10 +66,12 @@ public class Entity {
 
     public void update() {
         setAction();
-        spriteWalking = true;
 
         collisionOn = false;
         gp.cChecker.checkTile(this);
+        gp.cChecker.checkObject(this, false);
+        gp.cChecker.checkPlayer(this);
+
 
         // If collision is false, entity can move
         if(collisionOn == false && spriteWalking == true) {

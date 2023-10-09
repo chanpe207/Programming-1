@@ -47,6 +47,7 @@ public class MON_InkMonster extends Entity{
     public void setAction() {
 
         actionLockCounter++;
+        spriteWalking = true;
 
         if(actionLockCounter == 120) {
 
