@@ -25,7 +25,7 @@ public class Entity {
     public boolean collisionOn = false;
 
     // Dialogue
-//    public int actionLockCounter = 0;
+    public int actionLockCounter = 0;
 //    String dialogues[] = new String[20];
 //    int dialogueIndex = 0;
 
@@ -58,6 +58,53 @@ public class Entity {
 
         return image;
 
+    }
+
+    public void setAction() {
+
+    }
+
+    public void update() {
+        setAction();
+        spriteWalking = true;
+
+        collisionOn = false;
+        gp.cChecker.checkTile(this);
+
+        // If collision is false, entity can move
+        if(collisionOn == false && spriteWalking == true) {
+
+            switch(direction) {
+                case "up":
+                    worldY -= speed;
+                    break;
+                case "down":
+                    worldY += speed;
+                    break;
+                case "right":
+                    worldX += speed;
+                    break;
+                case "left":
+                    worldX -= speed;
+                    break;
+            }
+        }
+
+        // Walking or Standing sprite animation
+        if(spriteWalking == true) {
+            spriteCounter++;
+            if (spriteCounter > spriteNext) {
+                if (spriteNum < 4) {
+                    spriteNum++;
+                } else {
+                    spriteNum = 1;
+                }
+                spriteCounter = 0;
+            }
+        }
+        else {
+            spriteNum = 5;
+        }
     }
 
     public void draw(Graphics2D g2) {

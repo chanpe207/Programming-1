@@ -16,4 +16,10 @@ public class AssetSetter {
         gp.obj[1].worldY = gp.tileSize*14;
 
     }
+
+    public void setMonster() {
+        gp.monster[0] = new MON_InkMonster(gp);
+        gp.monster[0].worldX = gp.tileSize*12;
+        gp.monster[0].worldY = gp.tileSize*31;
+    }
 }
