@@ -41,6 +41,7 @@ public class Player extends Entity{
         // Player status
         maxLife = 6; // 2 lives = 1 heart
         life = maxLife;
+
     }
 
     public void getPlayerImage() {
@@ -101,7 +102,7 @@ public class Player extends Entity{
 
         // Check monster collision
         int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-        interactMonster(monsterIndex);
+        contactMonster(monsterIndex);
 
         // If collision is false, and arrow key is pressed, player can move
         if(collisionOn == false && spriteWalking == true) {
@@ -137,6 +138,15 @@ public class Player extends Entity{
         else {
             spriteNum = 5;
         }
+
+        // Invincible status effect
+        if(invincible == true) {
+            invincibleCounter++;
+            if(invincibleCounter>60) {
+                invincible = false;
+                invincibleCounter = 0;
+            }
+        }
     }
 
     public void pickUpObject(int i) {
@@ -148,11 +158,15 @@ public class Player extends Entity{
 
     }
 
-    public void interactMonster(int i) {
-
-        //check if an object was touched
+    public void contactMonster(int i) {
+        //check if a monster was touched
         if(i != 999) {
-            System.out.println("You touched a monster!");
+
+            if(invincible == false) {
+                life --;
+                invincible = true;
+            }
+
         }
     }
 

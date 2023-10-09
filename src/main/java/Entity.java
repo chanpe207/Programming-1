@@ -32,6 +32,9 @@ public class Entity {
     // Character Status
     public int maxLife;
     public int life;
+    public boolean invincible = false;
+    public int invincibleCounter = 0;
+    public int type; //0 - player, 1 - npc, 2 - monster, etc.
 
     // Object
     public BufferedImage image, image2, image3;
@@ -70,8 +73,15 @@ public class Entity {
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
-        gp.cChecker.checkPlayer(this);
+        gp.cChecker.checkEntity(this, gp.monster);
+        boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
+        if(this.type == 2 && contactPlayer == true) {
+            if(gp.player.invincible == false) {
+                gp.player.life --;
+                gp.player.invincible = true;
+            }
+        }
 
         // If collision is false, entity can move
         if(collisionOn == false && spriteWalking == true) {
@@ -192,7 +202,16 @@ public class Entity {
             }
         }
 
+        // Make player transparent when invincible
+        if(invincible == true) {
+            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+        }
+
         g2.drawImage(image, screenX, screenY, null);
+
+        // Reset alpha
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
     }
 
 }
