@@ -20,7 +20,7 @@ public class EventHandler {
 
     public void checkEvent() {
         //Event happens when hit
-        if(hit(16,10,"right") == true) {damagePit(gp.gameState);}
+        if(hit(1,20,"any") == true) {teleport(gp.gameState);}
     }
 
     public boolean hit(int eventCol, int eventRow, String reqDirection) {
@@ -55,5 +55,12 @@ public class EventHandler {
         gp.gameState = gameState;
         System.out.println("You fell into a pit!");
         gp.player.life -= 1;
+    }
+
+    public void teleport(int gameState) {
+        gp.gameState = gameState;
+        System.out.println("You were teleported!");
+        gp.player.worldX = 26*gp.tileSize;
+        gp.player.worldY = 4*gp.tileSize;
     }
 }

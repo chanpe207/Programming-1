@@ -104,6 +104,9 @@ public class Player extends Entity{
         int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
         contactMonster(monsterIndex);
 
+        //Check Event
+        gp.eHandler.checkEvent();
+
         // If collision is false, and arrow key is pressed, player can move
         if(collisionOn == false && spriteWalking == true) {
 
