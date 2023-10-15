@@ -197,12 +197,59 @@ public class UI {
     }
 
     public void drawDebugScreen() {
+        //Background Colour
+        g2.setColor(new Color(0, 0, 0, 128));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        //Font Colour
         g2.setColor(Color.white);
         g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15));
-        String text = "X: ";
+
+        //cause we look at de bugs
+        String text = "Why do they call it debugging? Cause we look at de bugs";
         int x = gp.tileSize/2;
         int y = gp.tileSize/2;
+        g2.drawString(text, x, y);
+
+        //Player coordinates
+        text = "X: ";
+        int height = (int)g2.getFontMetrics().getStringBounds(text, g2).getHeight();
+        x = gp.tileSize/2;
+        y = y + height;
         g2.drawString(text + gp.player.worldX, x, y);
+
+        text = " Y: ";
+        int length = (int)g2.getFontMetrics().getStringBounds(text + gp.player.worldX, g2).getWidth();
+        x = x + length;
+        g2.drawString(text + gp.player.worldY, x, y);
+
+        //Column and Row
+        text = "LeftCol: ";
+        height = (int)g2.getFontMetrics().getStringBounds(text, g2).getHeight();
+        x = gp.tileSize/2;
+        y = y + height;
+        int playerLeftCol = (gp.player.worldX + gp.player.solidArea.x)/gp.tileSize;
+        g2.drawString(text + playerLeftCol, x, y);
+
+        length = (int)g2.getFontMetrics().getStringBounds(text + playerLeftCol, g2).getWidth();
+        text = " RightCol: ";
+        x = x + length;
+        int playerRightCol = (gp.player.worldX + gp.player.solidArea.x + gp.player.solidArea.width)/gp.tileSize;
+        g2.drawString(text + playerRightCol, x, y);
+
+        length = (int)g2.getFontMetrics().getStringBounds(text + playerRightCol, g2).getWidth();
+        text = " TopRow: ";
+        x = x + length;
+        int playerTopRow = (gp.player.worldY + gp.player.solidArea.y)/gp.tileSize;
+        g2.drawString(text + playerTopRow, x, y);
+
+        length = (int)g2.getFontMetrics().getStringBounds(text + playerTopRow, g2).getWidth();
+        text = " BotRow: ";
+        x = x + length;
+        int playerBottomRow = (gp.player.worldY + gp.player.solidArea.y + gp.player.solidArea.height)/gp.tileSize;
+        g2.drawString(text + playerBottomRow, x, y);
+
+
     }
 
 }
