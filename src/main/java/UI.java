@@ -6,6 +6,7 @@ import java.io.IOException;
 public class UI {
 
     GamePanel gp;
+    KeyHandler keyH;
     Graphics2D g2;
     Font courier_20;
     BufferedImage full_heart, half_heart, no_heart;
@@ -13,8 +14,9 @@ public class UI {
     public String message = "";
     public int commandNum = 0;
 
-    public UI(GamePanel gp) {
+    public UI(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
+        this.keyH = keyH;
 
         courier_20 = new Font("Courier", Font.BOLD, 20);
 
@@ -48,6 +50,9 @@ public class UI {
         if(gp.gameState == gp.playState) {
             // Do play state
             drawPlayerLife();
+            if(keyH.debugKeyPressed == true) {
+                drawDebugScreen();
+            }
         }
         if(gp.gameState == gp.pauseState) {
             // Pause screen
@@ -189,6 +194,15 @@ public class UI {
         int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
         int x = gp.screenWidth/2 - length/2;
         return x;
+    }
+
+    public void drawDebugScreen() {
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 15));
+        String text = "X: ";
+        int x = gp.tileSize/2;
+        int y = gp.tileSize/2;
+        g2.drawString(text + gp.player.worldX, x, y);
     }
 
 }

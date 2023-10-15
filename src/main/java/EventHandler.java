@@ -19,10 +19,8 @@ public class EventHandler {
     }
 
     public void checkEvent() {
-        if(hit(27,16,"right") == true) {
-            //Event happens
-            damagePit();
-        }
+        //Event happens when hit
+        if(hit(16,10,"right") == true) {damagePit(gp.gameState);}
     }
 
     public boolean hit(int eventCol, int eventRow, String reqDirection) {
@@ -55,7 +53,7 @@ public class EventHandler {
 
     public void damagePit(int gameState) {
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "You fell into a pit!";
+        System.out.println("You fell into a pit!");
         gp.player.life -= 1;
     }
 }

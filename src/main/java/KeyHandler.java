@@ -5,6 +5,7 @@ public class KeyHandler implements KeyListener {
 
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
+    public boolean debugKeyPressed;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -98,6 +99,11 @@ public class KeyHandler implements KeyListener {
             rightPressed = true;
         }
 
+        // Debug state
+        if(code == KeyEvent.VK_F3) {
+            debugKeyPressed = true;
+        }
+
         // Pause State
         if(code == KeyEvent.VK_ESCAPE) {
             if(gp.gameState == gp.playState) {
@@ -126,6 +132,11 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
             rightPressed = false;
+        }
+
+        // Debug state
+        if(code == KeyEvent.VK_F3) {
+            debugKeyPressed = false;
         }
 
     }
