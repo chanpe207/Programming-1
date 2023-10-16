@@ -10,9 +10,14 @@ public class UI {
     Graphics2D g2;
     Font courier_20;
     BufferedImage full_heart, half_heart, no_heart;
-    public boolean messageOn = false;
-    public String message = "";
+    BufferedImage textboxImage;
+//    public boolean messageOn = false;
+    public int availableTextWidth = (100-8)*3;
+//    public int availableTextHeight = (30-8)*3;
     public int commandNum = 0;
+    public String displayedText = "";
+    public boolean textDisplayed;
+    int textDisplayedTime = 0;
 
     public UI(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -25,13 +30,17 @@ public class UI {
         full_heart = heart.image;
         half_heart = heart.image2;
         no_heart = heart.image3;
-    }
+        //text box
+        UtilityTool uTool = new UtilityTool();
 
-    public void showMessage(String text) {
+        try {
 
-        message = text;
-        messageOn = true;
+            textboxImage = ImageIO.read(getClass().getResourceAsStream("/boxes/textbox.png"));
+            textboxImage = uTool.scaleImage(textboxImage, gp.tileSize, gp.tileSize);
 
+        }catch(IOException e)   {
+            e.printStackTrace();
+        }
     }
 
     public void draw(Graphics2D g2) {
@@ -53,11 +62,52 @@ public class UI {
             if(keyH.debugKeyPressed == true) {
                 drawDebugScreen();
             }
+            if(textDisplayed == true) {
+                displayText(displayedText);
+                textDisplayedTime++;
+                if(textDisplayedTime>180) {
+                    textDisplayed = false;
+                    textDisplayedTime = 0;
+                    displayedText = "";
+                }
+            }
         }
         if(gp.gameState == gp.pauseState) {
             // Pause screen
             drawPauseScreen();
         }
+    }
+
+    public void displayText(String text) {
+
+        String[] message = text.split(" ");
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
+        int length = 0;
+        String[] displayedMessage = null;
+        int i = 0;
+        int j = 0;
+
+        //Display text box
+        int x = gp.screenWidth/2 - (100*3)/2;
+        int y = gp.screenHeight - x - 30;
+        g2.drawImage(textboxImage, x, y, null);
+
+        //Display text from top right of textbox available space
+        int height = (int) g2.getFontMetrics().getStringBounds(text, g2).getHeight();
+        x = x + (3*4);
+        y = y + (3*4) + height;
+
+        while (message != null) {
+            while (length < availableTextWidth) {
+                displayedMessage[j] = displayedMessage[j].concat(message[i]);
+                length = (int) g2.getFontMetrics().getStringBounds(displayedMessage[j], g2).getWidth();
+                message[i] = null;
+                i++;
+            }
+            g2.drawString(displayedMessage[j], x, (y + (height*j)));
+            j++;
+        }
+
     }
 
     public void drawPlayerLife() {

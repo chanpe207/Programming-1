@@ -3,11 +3,13 @@ import java.awt.*;
 public class EventHandler {
 
     GamePanel gp;
+    UI ui;
     Rectangle eventRect;
     int eventRectDefaultX, eventRectDefaultY;
 
-    public EventHandler(GamePanel gp) {
+    public EventHandler(GamePanel gp, UI ui) {
         this.gp = gp;
+        this.ui = ui;
 
         eventRect = new Rectangle();
         eventRect.x = 23;
@@ -20,7 +22,11 @@ public class EventHandler {
 
     public void checkEvent() {
         //Event happens when hit
-        if(hit(1,20,"any") == true) {teleport(gp.gameState);}
+        if(hit(1,20,"any") == true) {
+            teleport(gp.gameState);
+            ui.displayedText = "You were teleported! Oh no! I am running out of room to talk!";
+            ui.textDisplayed = true;
+        }
     }
 
     public boolean hit(int eventCol, int eventRow, String reqDirection) {
