@@ -36,7 +36,7 @@ public class UI {
         try {
 
             textboxImage = ImageIO.read(getClass().getResourceAsStream("/boxes/textbox.png"));
-            textboxImage = uTool.scaleImage(textboxImage, gp.tileSize, gp.tileSize);
+            textboxImage = uTool.scaleImage(textboxImage, 100*3, 30*3);
 
         }catch(IOException e)   {
             e.printStackTrace();
@@ -83,29 +83,29 @@ public class UI {
         String[] message = text.split(" ");
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
         int length = 0;
-        String[] displayedMessage = null;
-        int i = 0;
-        int j = 0;
 
         //Display text box
         int x = gp.screenWidth/2 - (100*3)/2;
-        int y = gp.screenHeight - x - 30;
+        int y = gp.screenHeight - 10*3 - 30*3;
         g2.drawImage(textboxImage, x, y, null);
+
 
         //Display text from top right of textbox available space
         int height = (int) g2.getFontMetrics().getStringBounds(text, g2).getHeight();
         x = x + (3*4);
-        y = y + (3*4) + height;
+        y = y + height;
+        int textStartX = x;
+        int textEndX = availableTextWidth + x;
 
-        while (message != null) {
-            while (length < availableTextWidth) {
-                displayedMessage[j] = displayedMessage[j].concat(message[i]);
-                length = (int) g2.getFontMetrics().getStringBounds(displayedMessage[j], g2).getWidth();
-                message[i] = null;
-                i++;
+        for(int i = 0; i < message.length; i++) {
+            message[i] = message[i].concat(" ");
+            if(x>textEndX) {
+                x = textStartX;
+                y += height;
             }
-            g2.drawString(displayedMessage[j], x, (y + (height*j)));
-            j++;
+            g2.drawString(message[i], x, y);
+            length = (int) g2.getFontMetrics().getStringBounds(message[i], g2).getWidth();
+            x += length;
         }
 
     }
