@@ -6,6 +6,7 @@ public class KeyHandler implements KeyListener {
     GamePanel gp;
     public boolean upPressed, downPressed, leftPressed, rightPressed;
     public boolean debugKeyPressed;
+    public  boolean enterPressed;
 
     public KeyHandler(GamePanel gp) {
         this.gp = gp;
@@ -55,7 +56,7 @@ public class KeyHandler implements KeyListener {
         }
 
         // Pause State
-        if(gp.gameState == gp.pauseState) {
+        else if(gp.gameState == gp.pauseState) {
             if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
                 gp.ui.commandNum--;
                 if(gp.ui.commandNum<0) {
@@ -84,25 +85,30 @@ public class KeyHandler implements KeyListener {
                 }
             }
         }
-
         // Play State
-        if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
-            upPressed = true;
-        }
-        if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
-            leftPressed = true;
-        }
-        if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
-            downPressed = true;
-        }
-        if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
-            rightPressed = true;
+        else if (gp.gameState == gp.playState) {
+            if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+                upPressed = true;
+            }
+            if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT) {
+                leftPressed = true;
+            }
+            if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+                downPressed = true;
+            }
+            if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
+                rightPressed = true;
+            }
+            if(code == KeyEvent.VK_ENTER) {
+                enterPressed = true;
+            }
+
+            // Debug state
+            if(code == KeyEvent.VK_F3) {
+                debugKeyPressed = true;
+            }
         }
 
-        // Debug state
-        if(code == KeyEvent.VK_F3) {
-            debugKeyPressed = true;
-        }
 
         // Pause State
         if(code == KeyEvent.VK_ESCAPE) {
@@ -132,6 +138,9 @@ public class KeyHandler implements KeyListener {
         }
         if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT) {
             rightPressed = false;
+        }
+        if(code == KeyEvent.VK_ENTER) {
+            enterPressed = false;
         }
 
         // Debug state

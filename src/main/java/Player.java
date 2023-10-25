@@ -28,6 +28,7 @@ public class Player extends Entity{
 
         setDefaultValues();
         getPlayerImage();
+        getPlayerAttackImage();
 
     }
 
@@ -37,10 +38,15 @@ public class Player extends Entity{
         speed = 4;
         direction = "down";
         spriteWalking = false;
+        invincibleTransparency = 0.3f;
 
         // Player status
         maxLife = 6; // 2 lives = 1 heart
         life = maxLife;
+
+        //attack area
+        attackArea.height = 36;
+        attackArea.width = 36;
 
     }
 
@@ -101,6 +107,7 @@ public class Player extends Entity{
             spriteWalking = false;
         }
 
+
         // Check tile collision
         collisionOn = false;
         gp.cChecker.checkTile(this);
@@ -135,20 +142,30 @@ public class Player extends Entity{
             }
         }
 
-        // Walking or Standing sprite animation
-        if(spriteWalking == true) {
-            spriteCounter++;
-            if (spriteCounter > spriteNext) {
-                if (spriteNum < 4) {
-                    spriteNum++;
-                } else {
-                    spriteNum = 1;
-                }
-                spriteCounter = 0;
-            }
+        //Attack key pressed
+        if (keyH.enterPressed == true) {
+            attacking = true;
+        }
+
+        if (attacking == true) {
+            attacking();
         }
         else {
-            spriteNum = 5;
+            // Walking or Standing sprite animation
+            if(spriteWalking == true) {
+                spriteCounter++;
+                if (spriteCounter > spriteNext) {
+                    if (spriteNum < 4) {
+                        spriteNum++;
+                    } else {
+                        spriteNum = 1;
+                    }
+                    spriteCounter = 0;
+                }
+            }
+            else {
+                spriteNum = 5;
+            }
         }
 
         // Invincible status effect
@@ -158,6 +175,46 @@ public class Player extends Entity{
                 invincible = false;
                 invincibleCounter = 0;
             }
+        }
+    }
+
+    public void attacking() {
+        spriteCounter++;
+
+        if(spriteCounter <= spriteNext*4) {
+            spriteNum = 1;
+
+            //Save current worldX/Y and solidArea
+            int currentWorldX = worldX;
+            int currentWorldY = worldY;
+            int solidAreaWidth = solidArea.width;
+            int solidAreaHeight = solidArea.height;
+
+            //Adjust player's worldX/Y for attackArea
+            switch(direction) {
+                case "up": worldY -= attackArea.height; break;
+                case "down": worldY += attackArea.height; break;
+                case "left": worldX -= attackArea.width; break;
+                case "right": worldX += attackArea.width; break;
+            }
+            //attackArea becomes solidArea
+            solidArea.width = attackArea.width;
+            solidArea.height = attackArea.height;
+
+            //collision check with monsters with updated worldX/Y and solidArea
+            int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
+            damageMonster(monsterIndex);
+
+            //reset player's worldX/Y and solidArea
+            worldX = currentWorldX;
+            worldY = currentWorldY;
+            solidArea.width = solidAreaWidth;
+            solidArea.height = solidAreaHeight;
+
+        }
+        else {
+            spriteCounter = 0;
+            attacking = false;
         }
     }
 
@@ -179,6 +236,19 @@ public class Player extends Entity{
                 invincible = true;
             }
 
+        }
+    }
+
+    public void damageMonster(int i) {
+        if(i != 999) {
+            if(gp.monster[i].invincible == false) {
+                gp.monster[i].life --;
+                gp.monster[i].invincible = true;
+
+                if(gp.monster[i].life <= 0) {
+                    gp.monster[i] = null;
+                }
+            }
         }
     }
 
