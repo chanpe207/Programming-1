@@ -90,7 +90,7 @@ public class UI {
         g2.drawImage(textboxImage, x, y, null);
 
 
-        //Display text from top right of textbox available space
+        //Display text from top left of textbox available space
         int height = (int) g2.getFontMetrics().getStringBounds(text, g2).getHeight();
         x = x + (3*4);
         y = y + height;

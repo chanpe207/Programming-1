@@ -23,26 +23,29 @@ public class MON_InkMonster extends Entity{
     }
 
     public void getImage() {
-        standingBackward = setup("/monster/ink_monster_left_1");
-        standingForward = setup("/monster/ink_monster_right_1");
-        standingLeft = setup("/monster/ink_monster_left_1");
-        standingRight = setup("/monster/ink_monster_right_1");
-        forward1 = setup("/monster/ink_monster_right_1");
-        forward2 = setup("/monster/ink_monster_right_2");
-        forward3 = setup("/monster/ink_monster_right_3");
-        forward4 = setup("/monster/ink_monster_right_2");
-        backward1 = setup("/monster/ink_monster_left_1");
-        backward2 = setup("/monster/ink_monster_left_2");
-        backward3 = setup("/monster/ink_monster_left_3");
-        backward4 = setup("/monster/ink_monster_left_2");
-        left1 = setup("/monster/ink_monster_left_1");
-        left2 = setup("/monster/ink_monster_left_2");
-        left3 = setup("/monster/ink_monster_left_3");
-        left4 = setup("/monster/ink_monster_left_2");
-        right1 = setup("/monster/ink_monster_right_1");
-        right2 = setup("/monster/ink_monster_right_2");
-        right3 = setup("/monster/ink_monster_right_3");
-        right4 = setup("/monster/ink_monster_right_2");
+        int width = gp.tileSize;
+        int height = gp.tileSize;
+
+        standingBackward = setup("/monster/ink_monster_left_1", width, height);
+        standingForward = setup("/monster/ink_monster_right_1", width, height);
+        standingLeft = setup("/monster/ink_monster_left_1", width, height);
+        standingRight = setup("/monster/ink_monster_right_1", width, height);
+        forward1 = setup("/monster/ink_monster_right_1", width, height);
+        forward2 = setup("/monster/ink_monster_right_2", width, height);
+        forward3 = setup("/monster/ink_monster_right_3", width, height);
+        forward4 = setup("/monster/ink_monster_right_2", width, height);
+        backward1 = setup("/monster/ink_monster_left_1", width, height);
+        backward2 = setup("/monster/ink_monster_left_2", width, height);
+        backward3 = setup("/monster/ink_monster_left_3", width, height);
+        backward4 = setup("/monster/ink_monster_left_2", width, height);
+        left1 = setup("/monster/ink_monster_left_1", width, height);
+        left2 = setup("/monster/ink_monster_left_2", width, height);
+        left3 = setup("/monster/ink_monster_left_3", width, height);
+        left4 = setup("/monster/ink_monster_left_2", width, height);
+        right1 = setup("/monster/ink_monster_right_1", width, height);
+        right2 = setup("/monster/ink_monster_right_2", width, height);
+        right3 = setup("/monster/ink_monster_right_3", width, height);
+        right4 = setup("/monster/ink_monster_right_2", width, height);
     }
 
     public void setAction() {

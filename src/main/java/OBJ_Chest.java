@@ -7,6 +7,6 @@ public class OBJ_Chest extends Entity{
         super(gp);
 
         name = "Chest";
-        forward1 = setup("/objects/chest");
+        forward1 = setup("/objects/chest", gp.tileSize, gp.tileSize);
     }
 }

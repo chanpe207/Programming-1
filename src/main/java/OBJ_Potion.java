@@ -7,6 +7,6 @@ public class OBJ_Potion extends Entity{
         super(gp);
 
         name = "Potion";
-        forward1 = setup("/objects/potion");
+        forward1 = setup("/objects/potion", gp.tileSize, gp.tileSize);
     }
 }

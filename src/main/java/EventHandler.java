@@ -24,8 +24,6 @@ public class EventHandler {
         //Event happens when hit
         if(hit(1,20,"any") == true) {
             teleport(gp.gameState);
-            ui.displayedText = "You were teleported! Oh no! I am running out of room to talk!";
-            ui.textDisplayed = true;
         }
     }
 
@@ -65,8 +63,10 @@ public class EventHandler {
 
     public void teleport(int gameState) {
         gp.gameState = gameState;
-        System.out.println("You were teleported!");
         gp.player.worldX = 26*gp.tileSize;
         gp.player.worldY = 4*gp.tileSize;
+        ui.displayedText = "You were teleported!";
+        ui.textDisplayed = true;
     }
+
 }

@@ -13,6 +13,7 @@ public class Entity {
 
     // Sprite Image
     public BufferedImage standingBackward, standingForward, standingLeft, standingRight, backward1, backward2, backward3, backward4, forward1, forward2, forward3, forward4, left1, left2, left3, left4, right1, right2, right3, right4;
+    public BufferedImage attackUp1, attackUp2, attackDown1, attackDown2, attackLeft1, attackLeft2, attackRight1, attackRight2;
     public String direction = "down";
     public int spriteCounter = 0;
     public int spriteNum = 1;
@@ -45,7 +46,7 @@ public class Entity {
         this.gp = gp;
     }
 
-    public BufferedImage setup(String imageName) {
+    public BufferedImage setup(String imageName, int width, int height) {
 
         UtilityTool uTool = new UtilityTool();
         BufferedImage image = null;
@@ -53,7 +54,7 @@ public class Entity {
         try {
 
             image = ImageIO.read(getClass().getResourceAsStream(imageName +".png"));
-            image = uTool.scaleImage(image, gp.tileSize, gp.tileSize);
+            image = uTool.scaleImage(image, width, height);
 
         }catch(IOException e)   {
             e.printStackTrace();

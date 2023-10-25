@@ -7,6 +7,6 @@ public class OBJ_Key extends Entity{
         super(gp);
 
         name = "Key";
-        forward1 = setup("/objects/key");
+        forward1 = setup("/objects/key", gp.tileSize, gp.tileSize);
     }
 }

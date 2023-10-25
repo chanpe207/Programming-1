@@ -45,28 +45,37 @@ public class Player extends Entity{
     }
 
     public void getPlayerImage() {
+        int width = gp.tileSize;
+        int height = gp.tileSize;
 
-        standingBackward = setup("/player/Player_Standing_Backward");
-        standingForward = setup("/player/Player_Standing_Forward");
-        standingLeft = setup("/player/Player_Standing_Left");
-        standingRight = setup("/player/Player_Standing_Right");
-        forward1 = setup("/player/Player_Walking_Forward_1");
-        forward2 = setup("/player/Player_Walking_Forward_2");
-        forward3 = setup("/player/Player_Walking_Forward_3");
-        forward4 = setup("/player/Player_Walking_Forward_4");
-        backward1 = setup("/player/Player_Walking_Backward_1");
-        backward2 = setup("/player/Player_Walking_Backward_2");
-        backward3 = setup("/player/Player_Walking_Backward_3");
-        backward4 = setup("/player/Player_Walking_Backward_4");
-        left1 = setup("/player/Player_Walking_Left_1");
-        left2 = setup("/player/Player_Walking_Left_2");
-        left3 = setup("/player/Player_Walking_Left_3");
-        left4 = setup("/player/Player_Walking_Left_4");
-        right1 = setup("/player/Player_Walking_Right_1");
-        right2 = setup("/player/Player_Walking_Right_2");
-        right3 = setup("/player/Player_Walking_Right_3");
-        right4 = setup("/player/Player_Walking_Right_4");
+        standingBackward = setup("/player/Player_Standing_Backward", width, height);
+        standingForward = setup("/player/Player_Standing_Forward", width, height);
+        standingLeft = setup("/player/Player_Standing_Left", width, height);
+        standingRight = setup("/player/Player_Standing_Right", width, height);
+        forward1 = setup("/player/Player_Walking_Forward_1", width, height);
+        forward2 = setup("/player/Player_Walking_Forward_2", width, height);
+        forward3 = setup("/player/Player_Walking_Forward_3", width, height);
+        forward4 = setup("/player/Player_Walking_Forward_4", width, height);
+        backward1 = setup("/player/Player_Walking_Backward_1", width, height);
+        backward2 = setup("/player/Player_Walking_Backward_2", width, height);
+        backward3 = setup("/player/Player_Walking_Backward_3", width, height);
+        backward4 = setup("/player/Player_Walking_Backward_4", width, height);
+        left1 = setup("/player/Player_Walking_Left_1", width, height);
+        left2 = setup("/player/Player_Walking_Left_2", width, height);
+        left3 = setup("/player/Player_Walking_Left_3", width, height);
+        left4 = setup("/player/Player_Walking_Left_4", width, height);
+        right1 = setup("/player/Player_Walking_Right_1", width, height);
+        right2 = setup("/player/Player_Walking_Right_2", width, height);
+        right3 = setup("/player/Player_Walking_Right_3", width, height);
+        right4 = setup("/player/Player_Walking_Right_4", width, height);
 
+    }
+
+    public void getPlayerAttackImage() {
+        attackUp1 = setup("/player/Player_Backward_Attack", gp.tileSize, gp.tileSize*2);
+        attackDown1 = setup("/player/Player_Forward_Attack", gp.tileSize, gp.tileSize*2);
+        attackLeft1 = setup("/player/Player_Left_Attack", gp.tileSize*2, gp.tileSize);
+        attackRight1 = setup("/player/Player_Right_Attack", gp.tileSize*2, gp.tileSize);
     }
 
     public void update() {
