@@ -270,6 +270,7 @@ public class Player extends Entity{
                 gp.playSE(13);
                 gp.monster[i].life --;
                 gp.monster[i].invincible = true;
+                gp.monster[i].damageReaction();
 
                 if(gp.monster[i].life <= 0) {
                     gp.playSE(13);

@@ -48,6 +48,8 @@ public class Entity {
     public boolean dying = false;
     int dyingCounter = 0;
     public boolean alive = true;
+    boolean hpBarOn = false;
+    int hpBarCounter = 0;
 
     // Object
     public BufferedImage image, image2, image3;
@@ -207,9 +209,28 @@ public class Entity {
             }
         }
 
+        //Monster HP bar
+        if (type == 2 && hpBarOn == true) {
+            hpBarCounter++;
+            g2.setColor(Color.white);
+            g2.fillRect(screenX-2, screenY - 17, gp.tileSize+4, 14);
+            g2.setColor(Color.black);
+            g2.fillRect(screenX, screenY - 15, gp.tileSize, 10);
+            g2.setColor(Color.red);
+            g2.fillRect(screenX, screenY - 15, (gp.tileSize/maxLife)*life, 10);
+            if(hpBarCounter > gp.FPS*10) {
+                hpBarOn = false;
+                hpBarCounter = 0;
+            }
+        }
+
+
+
         // Make entity transparent when invincible
         if(invincible == true) {
             changeAlpha(g2, invincibleTransparency);
+            hpBarOn = true;
+            hpBarCounter = 0;
         }
 
         // Draw entity dying animation
@@ -257,4 +278,10 @@ public class Entity {
         g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
     }
 
+    protected void damageReaction() {
+        //move in opposite direction
+        actionLockCounter = 0;
+        direction = gp.player.direction;
+
+    }
 }
