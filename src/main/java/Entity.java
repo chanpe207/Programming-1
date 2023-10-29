@@ -21,6 +21,10 @@ public class Entity {
     public int spriteFPS = 8; // FPS of character animation
     public int spriteNext = 60/spriteFPS; // number of updates before sprite changes
     public float invincibleTransparency = 0.4f;
+    boolean spriteInvisible = false;
+    int blinkLength = 5;
+    int blinkIterations = 5;
+    int blinks = 0;
 
     // Collision area
     public Rectangle solidArea = new Rectangle(0, 0, 48, 48);
@@ -41,6 +45,9 @@ public class Entity {
     public boolean invincible = false;
     public int invincibleCounter = 0;
     public int type; //0 - player, 1 - npc, 2 - monster, etc.
+    public boolean dying = false;
+    int dyingCounter = 0;
+    public boolean alive = true;
 
     // Object
     public BufferedImage image, image2, image3;
@@ -199,16 +206,54 @@ public class Entity {
             }
         }
 
-        // Make player transparent when invincible
+        // Make entity transparent when invincible
         if(invincible == true) {
-            g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, invincibleTransparency));
+            changeAlpha(g2, invincibleTransparency);
+        }
+
+        // Draw entity dying animation
+        if(dying == true) {
+            dyingAnimation(g2);
         }
 
         g2.drawImage(image, tempScreenX, tempScreenY, null);
 
         // Reset alpha
-        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        changeAlpha(g2, 1f);
 
+    }
+
+    public void dyingAnimation(Graphics2D g2) {
+        dyingCounter++;
+
+        // blink the sprite
+        if (dyingCounter <= blinkLength) {
+            changeAlpha(g2, 0f);
+        }
+        if (blinks < blinkIterations) {
+            if (dyingCounter > blinkLength * (blinks + 1) && dyingCounter <= blinkLength * (blinks + 2)) {
+                if (!spriteInvisible) {
+                    changeAlpha(g2, 1f);
+                    spriteInvisible = true;
+                    blinks++;
+                } else {
+                    changeAlpha(g2, 0f);
+                    spriteInvisible = false;
+                    blinks++;
+                }
+            }
+        }
+        // kill sprite
+        if (blinks >= blinkIterations) {
+            dying = false;
+            alive = false;
+            blinks = 0;
+        }
+
+    }
+
+    public void changeAlpha(Graphics2D g2, float alphaValue) {
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alphaValue));
     }
 
 }

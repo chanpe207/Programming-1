@@ -11,6 +11,8 @@ public class MON_InkMonster extends Entity{
         maxLife = 4;
         life = maxLife;
         type = 2;
+        blinkLength = 5;
+        blinkIterations = 5;
 
         solidArea.x = 2 * gp.scale;
         solidArea.y = 8 * gp.scale;
