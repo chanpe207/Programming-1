@@ -45,8 +45,10 @@ public class Player extends Entity{
         life = maxLife;
 
         //attack area
-        attackArea.height = 36;
-        attackArea.width = 36;
+        attackArea.width = 4*gp.scale;
+        attackArea.height = 17*gp.scale;
+        attackArea.x = 6*gp.scale;
+        attackArea.y = 15*gp.scale;
 
     }
 
@@ -143,7 +145,8 @@ public class Player extends Entity{
         }
 
         //Attack key pressed
-        if (keyH.enterPressed == true) {
+        if (keyH.enterPressed == true && attacking == false) {
+            gp.playSE(7);
             attacking = true;
         }
 
@@ -189,19 +192,38 @@ public class Player extends Entity{
             int currentWorldY = worldY;
             int solidAreaWidth = solidArea.width;
             int solidAreaHeight = solidArea.height;
+            int solidAreaX = solidArea.x;
+            int solidAreaY = solidArea.y;
 
-            //Adjust player's worldX/Y for attackArea
+            //Adjust solidArea to attackArea
             switch(direction) {
-                case "up": worldY -= attackArea.height; break;
-                case "down": worldY += attackArea.height; break;
-                case "left": worldX -= attackArea.width; break;
-                case "right": worldX += attackArea.width; break;
+                case "up":
+                    solidArea.width = attackArea.width;
+                    solidArea.height = attackArea.height;
+                    solidArea.x = attackArea.x;
+                    solidArea.y = -gp.tileSize;
+                    break;
+                case "down":
+                    solidArea.width = attackArea.width;
+                    solidArea.height = attackArea.height;
+                    solidArea.x = attackArea.x;
+                    solidArea.y = attackArea.y;
+                    break;
+                case "left":
+                    solidArea.width = attackArea.height;
+                    solidArea.height = attackArea.width;
+                    solidArea.x = solidAreaX - attackArea.height;
+                    solidArea.y = solidAreaY + (2*gp.scale);
+                    break;
+                case "right":
+                    solidArea.width = attackArea.height;
+                    solidArea.height = attackArea.width;
+                    solidArea.x = solidAreaX + solidAreaWidth;
+                    solidArea.y = solidAreaY + (2*gp.scale);
+                    break;
             }
-            //attackArea becomes solidArea
-            solidArea.width = attackArea.width;
-            solidArea.height = attackArea.height;
 
-            //collision check with monsters with updated worldX/Y and solidArea
+            //collision check the attackArea with monsters
             int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
             damageMonster(monsterIndex);
 
@@ -210,6 +232,8 @@ public class Player extends Entity{
             worldY = currentWorldY;
             solidArea.width = solidAreaWidth;
             solidArea.height = solidAreaHeight;
+            solidArea.x = solidAreaX;
+            solidArea.y = solidAreaY;
 
         }
         else {
@@ -232,6 +256,7 @@ public class Player extends Entity{
         if(i != 999) {
 
             if(invincible == false) {
+                gp.playSE(13);
                 life --;
                 invincible = true;
             }
@@ -242,10 +267,12 @@ public class Player extends Entity{
     public void damageMonster(int i) {
         if(i != 999) {
             if(gp.monster[i].invincible == false) {
+                gp.playSE(13);
                 gp.monster[i].life --;
                 gp.monster[i].invincible = true;
 
                 if(gp.monster[i].life <= 0) {
+                    gp.playSE(13);
                     gp.monster[i].dying = true;
                 }
             }
