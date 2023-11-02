@@ -14,12 +14,12 @@ public class MON_InkMonster extends Entity{
         blinkLength = 5;
         blinkIterations = 5;
 
-        solidArea.x = 2 * gp.scale;
-        solidArea.y = 8 * gp.scale;
+        solidArea.x = 1 * gp.scale;
+        solidArea.y = 6 * gp.scale;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
-        solidArea.width = 12 * gp.scale;
-        solidArea.height = 8 * gp.scale;
+        solidArea.width = 14 * gp.scale;
+        solidArea.height = 10 * gp.scale;
 
         getImage();
     }
