@@ -44,17 +44,34 @@ public class Entity {
     public int life;
     public boolean invincible = false;
     public int invincibleCounter = 0;
-    public int type; //0 - player, 1 - npc, 2 - monster, etc.
     public boolean dying = false;
     int dyingCounter = 0;
     public boolean alive = true;
     boolean hpBarOn = false;
     int hpBarCounter = 0;
+    public boolean effectOn = false;
+    int effectCounter = 0;
+    public int playerScore = 0;
+
+    // Type
+    public int type; //0 - player, 1 - npc, 2 - monster, etc.
+    public final int type_player = 0;
+    public final int type_npc = 1;
+    public final int type_monster = 2;
+    public final int type_consumable = 3;
+
+    //Effect
+    public int effect; //0 - speed increase, 1 - speed decrease, 2 - damage increase, etc.
+    public final int effect_speedIncrease = 0;
+    public final int effect_speedDecrease = 1;
+    public final int effect_damageIncrease = 2;
 
     // Object
     public BufferedImage image, image2, image3;
     public String name;
     public boolean collision = false;
+    public String description;
+    public boolean consumed = false;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -142,6 +159,7 @@ public class Entity {
                 invincibleCounter = 0;
             }
         }
+
     }
 
     public void draw(Graphics2D g2) {
@@ -283,5 +301,8 @@ public class Entity {
         actionLockCounter = 0;
         direction = gp.player.direction;
 
+    }
+
+    protected void use() {
     }
 }

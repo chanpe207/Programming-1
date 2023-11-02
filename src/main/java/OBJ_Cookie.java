@@ -8,5 +8,18 @@ public class OBJ_Cookie extends Entity{
 
         name = "Cookie";
         forward1 = setup("/objects/cookie", gp.tileSize, gp.tileSize);
+        type = type_consumable;
+        description = "Cookie heals your life by 1 heart";
+    }
+    public void use(){
+        consumed = true; //updates in gp so this obj is null
+        if(gp.player.life < gp.player.maxLife) {
+            gp.player.life ++; //player life increases by 1
+            if(gp.player.life < gp.player.maxLife) {
+                gp.player.life ++; //player life increases by 1
+            }
+        }
+        gp.ui.displayedText = description; //shows description
+        gp.ui.textDisplayed = true;
     }
 }

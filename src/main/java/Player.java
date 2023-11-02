@@ -2,6 +2,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Player extends Entity{
     KeyHandler keyH;
@@ -43,6 +44,8 @@ public class Player extends Entity{
         // Player status
         maxLife = 6; // 2 lives = 1 heart
         life = maxLife;
+        type = type_player;
+        playerScore = 100;
 
         //attack area
         attackArea.width = 4*gp.scale;
@@ -179,6 +182,31 @@ public class Player extends Entity{
                 invincibleCounter = 0;
             }
         }
+
+        // Effects
+        if(effectOn == true) {
+            effectCounter++;
+            switch(effect){
+                case effect_speedIncrease:
+                    gp.player.speed = 8;
+                    if(effectCounter>10*gp.FPS) {
+                        gp.player.speed = 4;
+                        effectCounter = 0;
+                        effectOn = false;
+                    }
+                    break;
+                case effect_speedDecrease:
+                    gp.player.speed = 2;
+                    if(effectCounter>10*gp.FPS) {
+                        gp.player.speed = 4;
+                        effectCounter = 0;
+                        effectOn = false;
+                    }
+                    break;
+                case effect_damageIncrease:
+                    break;
+            }
+        }
     }
 
     public void attacking() {
@@ -246,7 +274,11 @@ public class Player extends Entity{
 
         //check if an object was touched
         if(i != 999) {
-
+            switch(gp.obj[i].type) {
+                case type_consumable:
+                    gp.obj[i].use();
+                    break;
+            }
         }
 
     }

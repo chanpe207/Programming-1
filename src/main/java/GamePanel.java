@@ -125,6 +125,15 @@ public class GamePanel extends JPanel implements Runnable{
                     }
                 }
             }
+
+            //Objects
+            for(int i = 0; i < obj.length; i++) {
+                if(obj[i] != null) {
+                    if(obj[i].consumed == true) {
+                        obj[i] = null;
+                    }
+                }
+            }
         }
         if(gameState == pauseState) {
             //nothing

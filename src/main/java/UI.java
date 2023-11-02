@@ -78,6 +78,15 @@ public class UI {
         }
     }
 
+    public void displayScore() {
+        String score = Integer.toString(gp.player.playerScore);
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
+        int x = gp.screenWidth - (gp.tileSize+5)*4;
+        int y = gp.tileSize;
+        g2.drawString(score, x, y);
+    }
+
     public void displayText(String text) {
 
         String[] message = text.split(" ");
@@ -112,7 +121,7 @@ public class UI {
 
     public void drawPlayerLife() {
 
-        // display on top left
+        // display on top right
         int x = gp.screenWidth - (gp.tileSize+5)*4;
         int y = gp.tileSize/2;
         int i = 0;
