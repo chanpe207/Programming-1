@@ -45,7 +45,7 @@ public class Player extends Entity{
         maxLife = 6; // 2 lives = 1 heart
         life = maxLife;
         type = type_player;
-        playerScore = 100;
+        playerScore = 0;
 
         //attack area
         attackArea.width = 4*gp.scale;

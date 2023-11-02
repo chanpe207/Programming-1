@@ -287,6 +287,7 @@ public class Entity {
         if (blinks >= blinkIterations) {
             dying = false;
             alive = false;
+            gp.player.playerScore += 100;
             blinks = 0;
         }
 

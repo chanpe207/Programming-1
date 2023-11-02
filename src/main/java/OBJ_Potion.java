@@ -15,6 +15,7 @@ public class OBJ_Potion extends Entity{
     }
     public void use(){
         consumed = true; //updates in gp so this obj is null
+        gp.playSE(2); //play sound effect
         gp.player.effect = effect_speedIncrease; //player speed doubled for 10s
         gp.player.effectOn = true;
         gp.ui.displayedText = description; //shows description

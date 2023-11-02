@@ -13,6 +13,7 @@ public class OBJ_Cookie extends Entity{
     }
     public void use(){
         consumed = true; //updates in gp so this obj is null
+        gp.playSE(2); //play sound effect
         if(gp.player.life < gp.player.maxLife) {
             gp.player.life ++; //player life increases by 1
             if(gp.player.life < gp.player.maxLife) {
