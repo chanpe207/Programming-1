@@ -59,6 +59,7 @@ public class UI {
         if(gp.gameState == gp.playState) {
             // Do play state
             drawPlayerLife();
+            displayScore();
             if(keyH.debugKeyPressed == true) {
                 drawDebugScreen();
             }
@@ -82,9 +83,9 @@ public class UI {
         String score = Integer.toString(gp.player.playerScore);
         g2.setColor(Color.white);
         g2.setFont(g2.getFont().deriveFont(Font.BOLD, 20));
-        int x = gp.screenWidth - (gp.tileSize+5)*4;
+        int x = gp.tileSize;
         int y = gp.tileSize;
-        g2.drawString(score, x, y);
+        g2.drawString("Score: "+score, x, y);
     }
 
     public void displayText(String text) {
