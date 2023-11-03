@@ -76,4 +76,16 @@ public class MON_InkMonster extends Entity{
             actionLockCounter = 0;
         }
     }
+
+    public void checkDrop() {
+        //random number
+        int i = new Random().nextInt(100)+1;
+
+        if(i<50){
+            dropItem(new OBJ_Cookie(gp));
+        }
+        else{
+            dropItem(new OBJ_Potion(gp));
+        }
+    }
 }

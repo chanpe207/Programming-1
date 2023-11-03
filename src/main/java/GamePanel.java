@@ -121,6 +121,7 @@ public class GamePanel extends JPanel implements Runnable{
                         monster[i].update();
                     }
                     else {
+                        monster[i].checkDrop();//check for loot drop
                         monster[i] = null;
                     }
                 }
