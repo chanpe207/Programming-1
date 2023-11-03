@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class AssetSetter {
 
     GamePanel gp;
@@ -51,9 +53,18 @@ public class AssetSetter {
         gp.obj[0][10].worldX = gp.tileSize*17;
         gp.obj[0][10].worldY = gp.tileSize*9;
 
+        gp.obj[0][11] = new OBJ_Key(gp);
+        gp.obj[0][11].worldX = gp.tileSize*17;
+        gp.obj[0][11].worldY = gp.tileSize*8;
+
         gp.obj[1][0] = new OBJ_Chest(gp);
         gp.obj[1][0].worldX = gp.tileSize*27;
-        gp.obj[1][0].worldY = gp.tileSize*10;
+        gp.obj[1][0].worldY = gp.tileSize*8;
+
+        gp.obj[1][1] = new OBJ_Key(gp);
+        gp.obj[1][1].worldX = gp.tileSize*27;
+        gp.obj[1][1].worldY = gp.tileSize*9;
+
 
     }
 
@@ -67,11 +78,11 @@ public class AssetSetter {
         gp.monster[0][1].worldY = gp.tileSize*31;
 
         gp.monster[1][0] = new MON_InkMonster(gp);
-        gp.monster[1][0].worldX = gp.tileSize*6;
+        gp.monster[1][0].worldX = gp.tileSize*26;
         gp.monster[1][0].worldY = gp.tileSize*9;
 
         gp.monster[1][1] = new MON_InkMonster(gp);
-        gp.monster[1][1].worldX = gp.tileSize*13;
-        gp.monster[1][1].worldY = gp.tileSize*3;
+        gp.monster[1][1].worldX = gp.tileSize*28;
+        gp.monster[1][1].worldY = gp.tileSize*9;
     }
 }

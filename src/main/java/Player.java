@@ -9,6 +9,7 @@ public class Player extends Entity{
 
     public final int screenX;
     public final int screenY;
+    public int numChests;
 
     public Player(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -47,6 +48,7 @@ public class Player extends Entity{
         life = maxLife;
         type = type_player;
         playerScore = 0;
+        numChests = 3;
 
         //attack area
         attackArea.width = 4*gp.scale;
@@ -209,10 +211,18 @@ public class Player extends Entity{
             }
         }
 
+        //Game Over Condition
         if(life <= 0) {
             gp.gameState = gp.gameOverState;
             gp.stopMusic();
             gp.playSE(12);
+        }
+
+        //Win Condition
+        if(numChests <= 0) {
+            gp.gameState = gp.winState;
+            gp.stopMusic();
+            gp.playSE(11);
         }
     }
 
@@ -282,8 +292,12 @@ public class Player extends Entity{
         //check if an object was touched
         if(i != 999) {
             switch(gp.obj[gp.currentMap][i].type) {
+                case type_interactable:
                 case type_consumable:
                     gp.obj[gp.currentMap][i].use();
+                    break;
+                case type_pickUpOnly:
+                    gp.obj[gp.currentMap][i].pickUp();
                     break;
             }
         }

@@ -3,6 +3,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Objects;
 
 public class GamePanel extends JPanel implements Runnable{
     //Screen Settings
@@ -49,6 +50,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int pauseState = 2;
     public final int optionsState = 3;
     public final int gameOverState = 4;
+    public final int winState = 5;
 
     public GamePanel() {
 
@@ -81,6 +83,7 @@ public class GamePanel extends JPanel implements Runnable{
         player.setDefaultValues();
         aSetter.setObject();
         aSetter.setMonster();
+        currentMap = 0;
     }
 
     public void startGameThread() {
@@ -150,15 +153,17 @@ public class GamePanel extends JPanel implements Runnable{
             }
 
             //Objects
-            for(int i = 0; i < obj[1].length; i++) {
-                if(obj[currentMap][i] != null) {
-                    if(obj[currentMap][i].consumed == true) {
-                        obj[currentMap][i] = null;
+           for(int i = 0; i < obj[1].length; i++) {
+                    if(obj[currentMap][i] != null) {
+                        if(obj[currentMap][i].consumed == true) {
+                            obj[currentMap][i].checkDrop();
+                            obj[currentMap][i] = null;
+                        }
                     }
                 }
-            }
+
         }
-        if(gameState == pauseState) {
+        if(gameState == pauseState||gameState == winState) {
             //nothing
         }
 

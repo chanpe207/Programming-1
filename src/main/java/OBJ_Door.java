@@ -8,6 +8,7 @@ public class OBJ_Door extends Entity{
         super(gp);
 
         name = "Door";
+        type = type_interactable;
         forward1 = setup("/objects/door", gp.tileSize, gp.tileSize);
         collision = true;
 
@@ -19,5 +20,20 @@ public class OBJ_Door extends Entity{
         solidAreaDefaultY = solidArea.y;
         solidArea.width = gp.tileSize;
         solidArea.height = 14 * gp.scale;
+    }
+
+    public void use() {
+        //check if key is available
+        if(gp.player.hasKey>0) {
+            //use key to open
+            gp.player.hasKey--;
+            gp.playSE(10);
+            consumed = true;
+        }
+        else {
+            gp.ui.displayedText = "You need a key to open this!";
+            gp.ui.textDisplayed = true;
+        }
+
     }
 }

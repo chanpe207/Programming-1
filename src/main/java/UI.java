@@ -88,6 +88,11 @@ public class UI {
         if(gp.gameState == gp.gameOverState) {
             drawGameOverScreen();
         }
+
+        // Win State
+        if(gp.gameState == gp.winState) {
+            drawWinScreen();
+        }
     }
 
     public void displayScore() {
@@ -350,6 +355,50 @@ public class UI {
 
         // Game Over
         g2.setColor(Color.red);
+        g2.drawString(text, x, y);
+
+        //Score
+        int height = (int)g2.getFontMetrics().getStringBounds(text,g2).getHeight();
+        g2.setColor(Color.white);
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40));
+        text = "Score: "+gp.player.playerScore;
+        x = getXforCenteredText(text);
+        y = y+height+gp.tileSize;
+        g2.drawString(text, x, y);
+
+        //Menu
+        text = "Title Screen";
+        x = getXforCenteredText(text);
+        y = gp.screenHeight/2 + gp.tileSize*2;
+        g2.drawString(text, x, y);
+        if(commandNum == 0) {
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+
+        text = "Quit";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if(commandNum == 1) {
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+    }
+
+    public void drawWinScreen() {
+        //Background Colour
+        g2.setColor(new Color(0, 0, 0, 128));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        //You Win Shadow
+        String text = "YOU WIN!";
+        g2.setColor(new Color(16, 96, 145));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60));
+        int x = getXforCenteredText(text);
+        int y = gp.screenHeight/2 - gp.tileSize*3;
+        g2.drawString(text, (x+5), (y+5));
+
+        //You Win
+        g2.setColor(Color.white);
         g2.drawString(text, x, y);
 
         //Score

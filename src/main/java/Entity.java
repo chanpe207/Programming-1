@@ -36,8 +36,6 @@ public class Entity {
 
     // Dialogue
     public int actionLockCounter = 0;
-//    String dialogues[] = new String[20];
-//    int dialogueIndex = 0;
 
     // Character Status
     public int maxLife;
@@ -59,6 +57,8 @@ public class Entity {
     public final int type_npc = 1;
     public final int type_monster = 2;
     public final int type_consumable = 3;
+    public final int type_pickUpOnly = 4;
+    public final int type_interactable = 5;
 
     //Effect
     public int effect; //0 - speed increase, 1 - speed decrease, 2 - damage increase, etc.
@@ -72,6 +72,7 @@ public class Entity {
     public boolean collision = false;
     public String description;
     public boolean consumed = false;
+    public int hasKey = 0;
 
     public Entity(GamePanel gp) {
         this.gp = gp;
@@ -304,8 +305,8 @@ public class Entity {
 
     }
 
-    protected void use() {
-    }
+    public void use() { }
+    public void pickUp(){ }
 
     public void checkDrop(){}
 

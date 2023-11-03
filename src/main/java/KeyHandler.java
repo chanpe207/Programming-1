@@ -182,8 +182,8 @@ public class KeyHandler implements KeyListener {
             }
         }
 
-        //Game Over State
-        if(gp.gameState == gp.gameOverState) {
+        //Game Over of Win State
+        if(gp.gameState == gp.gameOverState || gp.gameState == gp.winState) {
             if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
                 gp.ui.commandNum--;
                 if(gp.ui.commandNum<0) {
