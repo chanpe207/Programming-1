@@ -28,13 +28,13 @@ public class KeyHandler implements KeyListener {
             if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
                 gp.ui.commandNum--;
                 if(gp.ui.commandNum<0) {
-                    gp.ui.commandNum = 2;
+                    gp.ui.commandNum = 3;
                 }
             }
 
             if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
                 gp.ui.commandNum++;
-                if(gp.ui.commandNum>2) {
+                if(gp.ui.commandNum>3) {
                     gp.ui.commandNum = 0;
                 }
             }
@@ -47,7 +47,12 @@ public class KeyHandler implements KeyListener {
                         break;
                     case 1: //Load Game
                         break;
-                    case 2: //Quit
+                    case 2: //Options
+                        //Switch to options screen
+                        gp.gameState = gp.optionsState;
+                        gp.playMusic(4);
+                        break;
+                    case 3: //Quit
                         System.exit(0);
                         break;
                 }
@@ -117,6 +122,63 @@ public class KeyHandler implements KeyListener {
             }
             else if(gp.gameState == gp.pauseState) {
                 gp.gameState = gp.playState;
+            }
+        }
+
+        //Options State
+        if(gp.gameState == gp.optionsState) {
+            if(code == KeyEvent.VK_W || code == KeyEvent.VK_UP) {
+                gp.ui.commandNum--;
+                if(gp.ui.commandNum<0) {
+                    gp.ui.commandNum = 3;
+                }
+            }
+
+            if(code == KeyEvent.VK_S || code == KeyEvent.VK_DOWN) {
+                gp.ui.commandNum++;
+                if(gp.ui.commandNum>3) {
+                    gp.ui.commandNum = 0;
+                }
+            }
+
+            switch(gp.ui.commandNum) {
+                case 0: //Music
+                    if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){
+                        if(gp.music.volumeScale<5) {
+                            gp.music.volumeScale++;
+                            gp.music.checkVolume();
+                        }
+                    }
+                    if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){
+                        if(gp.music.volumeScale>0){
+                            gp.music.volumeScale--;
+                            gp.music.checkVolume();
+                        }
+                    }
+                    break;
+                case 1: //Sound Effects
+                    if(code == KeyEvent.VK_D || code == KeyEvent.VK_RIGHT){
+                        if(gp.se.volumeScale<5) {
+                            gp.se.volumeScale++;
+                            gp.playSE(13);
+                        }
+                    }
+                    if(code == KeyEvent.VK_A || code == KeyEvent.VK_LEFT){
+                        if(gp.se.volumeScale>0){
+                            gp.se.volumeScale--;
+                            gp.playSE(13);
+                        }
+                    }
+                    break;
+                case 2: //Controls
+
+                    break;
+                case 3: //Title Screen
+                    if(code == KeyEvent.VK_ENTER) {
+                        gp.gameState = gp.titleState;
+                        gp.stopMusic();
+                    }
+                    break;
             }
         }
 

@@ -73,9 +73,15 @@ public class UI {
                 }
             }
         }
+
+        // Pause State
         if(gp.gameState == gp.pauseState) {
-            // Pause screen
             drawPauseScreen();
+        }
+
+        // Options State
+        if(gp.gameState == gp.optionsState) {
+            drawOptionsScreen();
         }
     }
 
@@ -240,11 +246,83 @@ public class UI {
             g2.drawString(">", x-gp.tileSize, y);
         }
 
-        text = "Quit";
+        text = "Options";
         x = getXforCenteredText(text);
         y += gp.tileSize;
         g2.drawString(text, x, y);
         if(commandNum == 2) {
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+
+        text = "Quit";
+        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if(commandNum == 3) {
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+
+    }
+
+    public void drawOptionsScreen() {
+        //Background Colour
+        g2.setColor(new Color(26, 153, 166));
+        g2.fillRect(0,0,gp.screenWidth, gp.screenHeight);
+
+        //Options Shadow
+        String text = "OPTIONS";
+        g2.setColor(new Color(16, 96, 145));
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60));
+        int x = getXforCenteredText(text);
+        int y = gp.screenHeight/2 - gp.tileSize*3;
+        g2.drawString(text, (x+5), (y+5));
+
+        //Options Name
+        g2.setColor(Color.white);
+        g2.drawString(text, x, y);
+
+        //Menu
+        g2.setFont(g2.getFont().deriveFont(Font.PLAIN, 40));
+
+        text = "Music";
+        x = gp.screenWidth/2 - gp.tileSize*5;
+        y = gp.screenHeight/2 + gp.tileSize*2;
+        g2.drawString(text, x, y);
+        if(commandNum == 0) {
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+        //Music slider
+        int length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        int height = (int)g2.getFontMetrics().getStringBounds(text, g2).getHeight();
+        g2.drawRect(x+length+gp.tileSize*2, y-height/2, 45*3, height/2);
+        g2.fillRect(x+length+gp.tileSize*2, y-height/2, (45*3/5)*gp.music.volumeScale, height/2);
+
+        text = "Sound";
+//        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if(commandNum == 1) {
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+        //Sound slider
+        length = (int)g2.getFontMetrics().getStringBounds(text, g2).getWidth();
+        height = (int)g2.getFontMetrics().getStringBounds(text, g2).getHeight();
+        g2.drawRect(x+length+gp.tileSize*2, y-height/2, 45*3, height/2);
+        g2.fillRect(x+length+gp.tileSize*2, y-height/2, (45*3/5)*gp.se.volumeScale, height/2);
+
+        text = "Controls";
+//        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if(commandNum == 2) {
+            g2.drawString(">", x-gp.tileSize, y);
+        }
+
+        text = "Title Screen";
+//        x = getXforCenteredText(text);
+        y += gp.tileSize;
+        g2.drawString(text, x, y);
+        if(commandNum == 3) {
             g2.drawString(">", x-gp.tileSize, y);
         }
 
