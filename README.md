@@ -1,4 +1,6 @@
 # Programming-1
+Made by Charlize Petersen SID 13918988
+
 For my Programming 1 Extension Assignment I have created a 2D Adventure Game using Java as my coding language.
 
 Assignment Objectives:
@@ -7,6 +9,13 @@ Assignment Objectives:
 - Includes original graphics
 - Includes a boss that can be fought by player
 - Game demonstrates the basics of programming language and further independent research
+
+To Play:
+- WASD or arrow keys to control character
+- Enter to use weapon
+- Interact by walking into objects
+
+Objective: Figure it out!
 
 Based on <a href="https://www.youtube.com/playlist?list=PL_QPQmz5C6WUF-pOQDsbsKbaBZqXj4qSq">tutorial by RyiSnow on Youtube</a>
 
