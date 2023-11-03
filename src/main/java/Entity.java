@@ -311,13 +311,13 @@ public class Entity {
 
     public void dropItem(Entity droppedItem) {
         //assign the droppedItem to the object ArrayList
-        for(int i = 0; i < gp.obj.length; i++) {
-            if(gp.obj[i] == null) {
+        for(int i = 0; i < gp.obj[1].length; i++) {
+            if(gp.obj[gp.currentMap][i] == null) {
                 //assign to the next null slot
-                gp.obj[i] = droppedItem;
+                gp.obj[gp.currentMap][i] = droppedItem;
                 //place in the world where monster died
-                gp.obj[i].worldX = worldX;
-                gp.obj[i].worldY = worldY;
+                gp.obj[gp.currentMap][i].worldX = worldX;
+                gp.obj[gp.currentMap][i].worldY = worldY;
                 break; //breaks loop once an empty slot is filled
             }
         }

@@ -18,13 +18,15 @@ public class GamePanel extends JPanel implements Runnable{
     // World Settings
     public final int maxWorldCol = maxScreenCol * 3;
     public final int maxWorldRow = maxScreenRow * 3;
+    public final int maxMap = 10;
+    public int currentMap = 0;
 
     // FPS
     int FPS = 60;
 
     // System
     TileManager tileM = new TileManager(this);
-    KeyHandler keyH = new KeyHandler(this); //instantiates keyHandler class
+    KeyHandler keyH = new KeyHandler(this);
     Sound music = new Sound();
     Sound se = new Sound();
     CollisionChecker cChecker = new CollisionChecker(this);
@@ -36,8 +38,8 @@ public class GamePanel extends JPanel implements Runnable{
 
     // Entities and Objects
     public Player player = new Player(this,keyH);
-    public Entity obj[] = new Entity[10];
-    public Entity monster[] = new Entity[20];
+    public Entity obj[][] = new Entity[maxMap][30];
+    public Entity monster[][] = new Entity[maxMap][30];
     ArrayList<Entity> entityList = new ArrayList<>();
 
     // Game State
@@ -66,8 +68,16 @@ public class GamePanel extends JPanel implements Runnable{
 
     public void resetGame() {
         entityList.clear();
-        for(int i=0;i<obj.length;i++){obj[i] = null;}
-        for(int i=0;i<monster.length;i++){monster[i] = null;}
+        for(int j=0;j<obj.length;j++) {
+            for (int i = 0; i < obj[j].length; i++) {
+                obj[j][i] = null;
+            }
+        }
+        for(int j=0;j<obj.length;j++) {
+            for (int i = 0; i < monster[j].length; i++) {
+                monster[j][i] = null;
+            }
+        }
         player.setDefaultValues();
         aSetter.setObject();
         aSetter.setMonster();
@@ -127,23 +137,23 @@ public class GamePanel extends JPanel implements Runnable{
             player.update();
 
             //Monsters
-            for(int i = 0; i < monster.length; i++) {
-                if(monster[i] != null) {
-                    if(monster[i].alive == true) {
-                        monster[i].update();
+            for(int i = 0; i < monster[1].length; i++) {
+                if(monster[currentMap][i] != null) {
+                    if(monster[currentMap][i].alive == true) {
+                        monster[currentMap][i].update();
                     }
                     else {
-                        monster[i].checkDrop();//check for loot drop
-                        monster[i] = null;
+                        monster[currentMap][i].checkDrop();//check for loot drop
+                        monster[currentMap][i] = null;
                     }
                 }
             }
 
             //Objects
-            for(int i = 0; i < obj.length; i++) {
-                if(obj[i] != null) {
-                    if(obj[i].consumed == true) {
-                        obj[i] = null;
+            for(int i = 0; i < obj[1].length; i++) {
+                if(obj[currentMap][i] != null) {
+                    if(obj[currentMap][i].consumed == true) {
+                        obj[currentMap][i] = null;
                     }
                 }
             }
@@ -171,14 +181,14 @@ public class GamePanel extends JPanel implements Runnable{
             // Create entities list
             entityList.add(player);
 
-            for(int i = 0; i < obj.length; i++) {
-                if(obj[i] != null) {
-                    entityList.add(obj[i]);
+            for(int i = 0; i < obj[1].length; i++) {
+                if(obj[currentMap][i] != null) {
+                    entityList.add(obj[currentMap][i]);
                 }
             }
-            for(int i = 0; i < monster.length; i++) {
-                if(monster[i] != null) {
-                    entityList.add(monster[i]);
+            for(int i = 0; i < monster[1].length; i++) {
+                if(monster[currentMap][i] != null) {
+                    entityList.add(monster[currentMap][i]);
                 }
             }
 

@@ -35,7 +35,7 @@ public class Player extends Entity{
 
     public void setDefaultValues () {
         worldX = gp.tileSize * 27 - (gp.tileSize/2);
-        worldY = gp.tileSize * 4 - (gp.tileSize/2);
+        worldY = gp.tileSize * 14 - (gp.tileSize/2);
         speed = 4;
         direction = "down";
         spriteWalking = false;
@@ -281,9 +281,9 @@ public class Player extends Entity{
 
         //check if an object was touched
         if(i != 999) {
-            switch(gp.obj[i].type) {
+            switch(gp.obj[gp.currentMap][i].type) {
                 case type_consumable:
-                    gp.obj[i].use();
+                    gp.obj[gp.currentMap][i].use();
                     break;
             }
         }
@@ -305,15 +305,15 @@ public class Player extends Entity{
 
     public void damageMonster(int i) {
         if(i != 999) {
-            if(gp.monster[i].invincible == false) {
+            if(gp.monster[gp.currentMap][i].invincible == false) {
                 gp.playSE(13);
-                gp.monster[i].life --;
-                gp.monster[i].invincible = true;
-                gp.monster[i].damageReaction();
+                gp.monster[gp.currentMap][i].life --;
+                gp.monster[gp.currentMap][i].invincible = true;
+                gp.monster[gp.currentMap][i].damageReaction();
 
-                if(gp.monster[i].life <= 0) {
+                if(gp.monster[gp.currentMap][i].life <= 0) {
                     gp.playSE(13);
-                    gp.monster[i].dying = true;
+                    gp.monster[gp.currentMap][i].dying = true;
                 }
             }
         }

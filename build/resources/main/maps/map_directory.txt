@@ -1,7 +1,0 @@
-map01
-col: 18
-row: 14
-
-world01
-col: 54
-row: 42
