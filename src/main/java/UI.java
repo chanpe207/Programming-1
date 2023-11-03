@@ -12,7 +12,7 @@ public class UI {
     BufferedImage full_heart, half_heart, no_heart;
     BufferedImage textboxImage;
 //    public boolean messageOn = false;
-    public int availableTextWidth = (100-8)*3;
+    public int availableTextWidth = (100-12)*3;
 //    public int availableTextHeight = (30-8)*3;
     public int commandNum = 0;
     public String displayedText = "";
