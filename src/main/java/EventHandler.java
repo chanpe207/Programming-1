@@ -40,17 +40,17 @@ public class EventHandler {
     public void checkEvent() {
         //Switch map at bottom of map 0
         if(hit(0,27,40,"any") == true) {
-            teleport(gp.gameState, 1, 27, 1);
+            teleport(gp.gameState, 1, 27, 2);
         }
         else if(hit(0,26,40,"any") == true) {
-            teleport(gp.gameState, 1, 26, 1);
+            teleport(gp.gameState, 1, 26, 2);
         }
 
         //Switch map at top of map 1
-        if(hit(1,27,0,"any") == true) {
+        if(hit(1,27,1,"any") == true) {
             teleport(gp.gameState, 0, 27, 39);
         }
-        else if(hit(1,26,0,"any") == true) {
+        else if(hit(1,26,1,"any") == true) {
             teleport(gp.gameState, 0, 26, 39);
         }
     }
