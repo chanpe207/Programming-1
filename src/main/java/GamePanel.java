@@ -46,6 +46,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int playState = 1;
     public final int pauseState = 2;
     public final int optionsState = 3;
+    public final int gameOverState = 4;
 
     public GamePanel() {
 
@@ -61,6 +62,15 @@ public class GamePanel extends JPanel implements Runnable{
         aSetter.setObject();
         aSetter.setMonster();
         gameState = titleState;
+    }
+
+    public void resetGame() {
+        entityList.clear();
+        for(int i=0;i<obj.length;i++){obj[i] = null;}
+        for(int i=0;i<monster.length;i++){monster[i] = null;}
+        player.setDefaultValues();
+        aSetter.setObject();
+        aSetter.setMonster();
     }
 
     public void startGameThread() {

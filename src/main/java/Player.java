@@ -40,6 +40,7 @@ public class Player extends Entity{
         direction = "down";
         spriteWalking = false;
         invincibleTransparency = 0.3f;
+        invincible = false;
 
         // Player status
         maxLife = 6; // 2 lives = 1 heart
@@ -206,6 +207,12 @@ public class Player extends Entity{
                 case effect_damageIncrease:
                     break;
             }
+        }
+
+        if(life <= 0) {
+            gp.gameState = gp.gameOverState;
+            gp.stopMusic();
+            gp.playSE(12);
         }
     }
 
