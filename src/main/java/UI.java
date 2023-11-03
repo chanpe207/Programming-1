@@ -326,6 +326,8 @@ public class UI {
             g2.drawString(">", x-gp.tileSize, y);
         }
 
+        //Saves settings in config file
+        gp.config.saveConfig();
     }
 
     public int getXforCenteredText(String text) {
